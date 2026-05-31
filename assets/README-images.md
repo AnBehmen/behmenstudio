@@ -29,6 +29,32 @@ That action auto-generates:
 
 and commits them automatically, so the site updates on GitHub Pages.
 
+## Replace one specific image by number (easy mode)
+
+If she wants to replace only one existing gallery image:
+
+1. Open `assets/images/gallery-index.csv`
+2. Find the `slot` number of the image to replace
+3. Upload a new original photo into `assets/images/originals/inbox/`
+4. Start the replacement filename with that slot number:
+   - `12-new-photo.jpg`
+   - `034-better-version.png`
+5. Commit upload in GitHub web UI
+
+What happens automatically:
+
+- the workflow resizes the photo
+- replaces that exact slot image on the live site
+- updates `gallery-data.js`
+- removes the uploaded original from `inbox/` to keep it clean
+
+Important:
+
+- only one mode per run:
+  - full rebuild: upload to `assets/images/originals/`
+  - slot replace: upload to `assets/images/originals/inbox/`
+- do not upload to both locations in the same commit
+
 ## What goes where
 
 ### `assets/images/originals/`

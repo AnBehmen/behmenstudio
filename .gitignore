@@ -1,3 +1,5 @@
 .DS_Store
 assets/images/originals/*
 !assets/images/originals/.gitkeep
+!assets/images/originals/inbox/
+!assets/images/originals/inbox/**
