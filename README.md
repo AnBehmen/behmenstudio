@@ -404,6 +404,47 @@ Check these:
 - the portfolio filters still work
 - the footer links still work
 
+## Hidden admin mode (upload, remove, replace) - live GitHub updates
+
+There is a hidden admin panel for gallery changes:
+
+- on the live page, type `admin` on your keyboard
+- enter the admin password: `behmen-admin-2026`
+- connect GitHub using a token and repo details
+
+What it does:
+
+- uploads/replaces image files in the repository
+- updates `gallery-data.js` in the repository
+- commits directly to the selected branch (default: `main`)
+- triggers GitHub Pages to publish those changes live
+
+GitHub token requirements:
+
+- use a Fine-grained Personal Access Token
+- repository access: `AnBehmen/behmenstudio`
+- permission needed: `Contents` = `Read and write`
+
+Security notes:
+
+- the token is stored only in `sessionStorage` for the current browser tab
+- anyone with browser access while the tab is open can use that token
+- rotate/revoke the token any time in GitHub settings
+
+If you want to change the admin password:
+
+1. generate a SHA-256 hash for your new password
+2. replace `ADMIN_PASSWORD_HASH` in `script.js`
+
+Example hash command:
+
+```bash
+python3 - <<'PY'
+import hashlib
+print(hashlib.sha256("your-new-password".encode()).hexdigest())
+PY
+```
+
 ## Helpful note if you get stuck
 
 If you ask someone else to help later, tell them:

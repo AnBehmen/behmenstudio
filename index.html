@@ -409,6 +409,84 @@
       <button class="lightbox-nav next" type="button" aria-label="Next image">→</button>
     </div>
 
+    <div class="admin-shell" id="admin-shell" aria-hidden="true" hidden>
+      <div class="admin-backdrop" data-admin-close="true"></div>
+      <aside class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+        <button class="admin-close" id="admin-close" type="button" aria-label="Close admin panel">×</button>
+        <h2 id="admin-title">Admin Mode</h2>
+        <p class="admin-note">
+          This admin commits image changes directly to the GitHub repository so they go live on GitHub Pages.
+        </p>
+        <p class="form-status admin-status" id="admin-status" aria-live="polite"></p>
+
+        <div id="admin-login-panel">
+          <form id="admin-login-form" class="admin-form">
+            <label class="form-label" for="admin-password">Admin password</label>
+            <input class="form-control" id="admin-password" name="admin-password" type="password" required />
+            <button class="btn btn-primary" type="submit">Unlock</button>
+          </form>
+        </div>
+
+        <div id="admin-github-panel" hidden>
+          <form id="admin-github-form" class="admin-form">
+            <h3>Connect GitHub</h3>
+            <label class="form-label" for="admin-github-token">GitHub token (repo contents write)</label>
+            <input class="form-control" id="admin-github-token" type="password" required />
+
+            <label class="form-label" for="admin-github-owner">Repo owner</label>
+            <input class="form-control" id="admin-github-owner" type="text" value="AnBehmen" required />
+
+            <label class="form-label" for="admin-github-repo">Repo name</label>
+            <input class="form-control" id="admin-github-repo" type="text" value="behmenstudio" required />
+
+            <label class="form-label" for="admin-github-branch">Branch</label>
+            <input class="form-control" id="admin-github-branch" type="text" value="main" required />
+
+            <button class="btn btn-primary" type="submit">Connect</button>
+          </form>
+        </div>
+
+        <div id="admin-work-panel" hidden>
+          <form id="admin-upload-form" class="admin-form">
+            <h3>Add Image</h3>
+            <label class="form-label" for="admin-image-file">Upload image file</label>
+            <input class="form-control" id="admin-image-file" type="file" accept="image/*" />
+
+            <label class="form-label" for="admin-src-path">Or image path / URL</label>
+            <input
+              class="form-control"
+              id="admin-src-path"
+              type="text"
+              placeholder="assets/images/web/new-image.webp"
+            />
+
+            <label class="form-label" for="admin-alt">Alt text</label>
+            <input class="form-control" id="admin-alt" type="text" required />
+
+            <label class="form-label" for="admin-category">Category</label>
+            <select class="form-control" id="admin-category"></select>
+
+            <label class="form-label" for="admin-mood">Mood</label>
+            <select class="form-control" id="admin-mood"></select>
+
+            <label class="form-label" for="admin-span">Grid span</label>
+            <input class="form-control" id="admin-span" type="number" min="20" max="56" value="36" />
+
+            <button class="btn btn-primary" type="submit">Add to Gallery</button>
+          </form>
+
+          <div class="admin-toolbar">
+            <button class="btn btn-secondary" id="admin-refresh-gallery" type="button">Refresh from GitHub</button>
+            <button class="btn btn-secondary" id="admin-logout" type="button">Lock</button>
+          </div>
+
+          <div class="admin-gallery-list" id="admin-gallery-list"></div>
+        </div>
+
+        <input id="admin-replace-file" type="file" accept="image/*" hidden />
+      </aside>
+    </div>
+
     <script src="gallery-data.js" defer></script>
     <script src="script.js" defer></script>
   </body>

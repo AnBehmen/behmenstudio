@@ -1118,6 +1118,119 @@ ul {
   right: 1rem;
 }
 
+body.admin-open {
+  overflow: hidden;
+}
+
+.admin-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 260;
+}
+
+.admin-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 10, 10, 0.7);
+}
+
+.admin-panel {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: min(32rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  border: 1px solid var(--white-soft);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(24, 18, 17, 0.98), rgba(20, 16, 15, 0.98));
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.admin-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  border: 1px solid var(--white-soft);
+  background: var(--charcoal-soft);
+  color: var(--white);
+  border-radius: 999px;
+  width: 2.1rem;
+  height: 2.1rem;
+  cursor: pointer;
+}
+
+.admin-panel h2 {
+  margin-right: 2.4rem;
+}
+
+.admin-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.admin-status {
+  margin-bottom: 0.9rem;
+}
+
+.admin-form {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.admin-gallery-list {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.admin-gallery-row {
+  display: grid;
+  grid-template-columns: 4.4rem 1fr;
+  gap: 0.7rem;
+  padding: 0.65rem;
+  border: 1px solid var(--white-soft);
+  border-radius: 0.85rem;
+  background: var(--surface-panel);
+}
+
+.admin-thumb {
+  width: 4.4rem;
+  height: 4.4rem;
+  object-fit: cover;
+  border-radius: 0.55rem;
+}
+
+.admin-gallery-meta p {
+  margin: 0;
+  font-size: 0.86rem;
+}
+
+.admin-gallery-meta p + p {
+  margin-top: 0.3rem;
+  color: var(--muted);
+}
+
+.admin-gallery-actions {
+  display: flex;
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+  grid-column: 2;
+}
+
+.admin-gallery-actions .btn {
+  padding: 0.4rem 0.65rem;
+  font-size: 0.82rem;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(26px);
@@ -1230,6 +1343,15 @@ a:focus-visible {
   .form-note,
   .form-status {
     text-align: center;
+  }
+
+  .admin-panel {
+    top: 0.5rem;
+    right: 0.5rem;
+    left: 0.5rem;
+    width: auto;
+    max-height: calc(100vh - 1rem);
+    padding: 0.9rem;
   }
 }
 
