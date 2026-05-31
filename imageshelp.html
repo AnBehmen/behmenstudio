@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Website designed by Zach Mackay: https://alexzander73.github.io/index.html -->
+  <!-- If you want to change wording on the main page, this is the main file to edit. -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Behmen Studio | Image Help</title>
+    <meta name="author" content="Zach Mackay | https://alexzander73.github.io/index.html" />
+    <meta
+      name="designer"
+      content="Website Designed by Zach Mackay | https://alexzander73.github.io/index.html"
+    />
+    <meta
+      name="description"
+      content="Elegant portrait and creative photography with guided sessions, polished edits, and a booking flow designed to feel easy from first message to final gallery."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Behmen Studio by Ana Behmenburg | Let's Capture Your Story" />
+    <meta
+      property="og:description"
+      content="Portraits, couples, and creative sessions with warm direction and editorial energy."
+    />
+    <meta property="og:image" content="assets/images/web/library-titelbild-2000-19to9.webp" />
+    <meta property="og:url" content="https://example.com/replace-with-live-url" />
+    <link rel="canonical" href="https://example.com/imageshelp" />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("ab-theme");
+        if (savedTheme === "warm" || savedTheme === "requested") {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch (error) {}
+    </script>
+    <link id="site-favicon" rel="icon" type="image/svg+xml" href="assets/icons/logo-ab.svg" />
+    <link rel="preload" as="image" href="assets/images/web/hero-main.webp" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="imageshelp.css" />
+  </head>
+  <body class="imageshelp-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header" id="top">
+      <div class="container nav-wrap">
+        <a class="brand" href="#home" aria-label="Behmen Studio by Ana Behmenburg home">
+          <img class="brand-logo" src="assets/icons/logo-ab.svg" alt="" width="44" height="44" />
+          <span>Behmen Studio by Ana Behmenburg</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+          <a href="#services">Services</a>
+          <a href="#gallery">Portfolio</a>
+          <a href="#about">About Me</a>
+          <a class="btn btn-primary booking-link nav-booking-btn" data-booking-link href="#contact">Contact Me</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <!-- Hero section: update the main homepage headline and the 3 floating photo filenames here. -->
+      <section class="hero section" id="home" aria-labelledby="hero-title">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="grain" aria-hidden="true"></div>
+        <div class="container hero-content reveal">
+          <p class="kicker">PORTRAITS • COUPLES • CREATIVE SESSIONS</p>
+          <h1 id="hero-title">Let's Capture Your Story</h1>
+          <p class="hero-subheadline">
+            From personal branding to events, I create high-quality visuals that help you
+            stand out, build trust, and tell your story with impact.
+          </p>
+          <div class="hero-cta-row">
+            <a class="btn btn-primary booking-link" data-booking-link href="#contact">Book a session</a>
+            <a class="btn btn-secondary" href="#gallery">View the gallery</a>
+          </div>
+        </div>
+
+        <div class="hero-cards" aria-hidden="true">
+          <figure class="hero-card card-a">
+            <img src="assets/images/web/hero-card-01.webp" alt="" loading="eager" decoding="async" />
+          </figure>
+          <figure class="hero-card card-b">
+            <img src="assets/images/web/hero-card-02.webp" alt="" loading="eager" decoding="async" />
+          </figure>
+          <figure class="hero-card card-c">
+            <img src="assets/images/web/hero-card-03.webp" alt="" loading="eager" decoding="async" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="section reveal" id="image-help" aria-labelledby="image-help-title">
+        <div class="container">
+          <article class="help-card">
+            <h2 id="image-help-title">Image Update Help</h2>
+            <p>Use this page to see the filename shown on each photo.</p>
+            <ol>
+              <li>For adding new photos: upload originals into <code>assets/images/originals/</code>.</li>
+              <li>For replacing one photo: open <code>assets/images/gallery-index.csv</code> and note the slot number.</li>
+              <li>Upload replacement into <code>assets/images/originals/replace-by-number/</code>.</li>
+              <li>Start filename with slot number, for example <code>12-new-photo.jpg</code>.</li>
+              <li>Commit in GitHub. Automation resizes and updates the live site.</li>
+            </ol>
+            <div class="help-actions">
+              <a class="btn btn-secondary" href="assets/images/gallery-index.csv">Open Slot List (CSV)</a>
+              <a class="btn btn-secondary" href="https://github.com/AnBehmen/behmenstudio/actions/workflows/process-gallery-images.yml" target="_blank" rel="noreferrer">Open Processing Status</a>
+            </div>
+            <p>If something looks wrong, ask your website helper for support and share the slot number shown on this page.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Services section: safe place to update service names, descriptions, prices, and service photos. -->
+      <section class="sessions section reveal" id="services" aria-labelledby="services-title">
+        <div class="container">
+          <div class="section-head">
+            <h2 id="services-title">Services</h2>
+            <p>Clear, high-impact photography options for brands, people, and live experiences.</p>
+          </div>
+
+          <div class="session-grid">
+            <article class="session-card">
+              <div class="session-media frame-image" aria-hidden="true">
+                <img src="assets/images/thumbnails/library-dsc-2803.webp" alt="" loading="lazy" decoding="async" />
+              </div>
+              <h3>Business Portrait</h3>
+              <p>
+                High-quality business portraits for your website, LinkedIn, and professional
+                platforms - designed to elevate your personal brand and create a lasting first
+                impression.
+              </p>
+              <div class="service-meta">
+                <p class="service-price">from $199</p>
+              </div>
+            </article>
+
+            <article class="session-card">
+              <div class="session-media frame-image" aria-hidden="true">
+                <img src="assets/images/thumbnails/library-22-06-19-lara-alper-und-katja-35.webp" alt="" loading="lazy" decoding="async" />
+              </div>
+              <h3>Private Shooting</h3>
+              <p>
+                Personal photography sessions designed to capture real moments, genuine emotions,
+                and the beauty of your story - whether it’s love, family, or new beginnings.
+              </p>
+              <div class="service-meta">
+                <p class="service-price">from $499</p>
+              </div>
+            </article>
+
+            <article class="session-card">
+              <div class="session-media frame-image" aria-hidden="true">
+                <img src="assets/images/thumbnails/library-26portfolio-ev-beispiele-30.webp" alt="" loading="lazy" decoding="async" />
+              </div>
+              <h3>Event / Commercial</h3>
+              <p>
+                From intimate launches to large public events, I preserve the moments that matter
+                - authentic interactions, important highlights, and the overall experience. The
+                result: powerful images you can use for marketing, media, and lasting memories.
+              </p>
+              <div class="service-meta">
+                <p class="service-price">price on demand</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="mood-gallery section reveal" id="gallery" aria-labelledby="mood-title">
+        <div class="container">
+          <div class="section-head">
+            <h2 id="mood-title">Portfolio</h2>
+          </div>
+
+          <!-- Portfolio filters are built automatically from the gallery data in gallery-data.js. -->
+          <div class="filter-row" id="gallery-filters" role="toolbar" aria-label="Gallery filter buttons"></div>
+
+          <div class="gallery-grid" id="gallery-grid" aria-live="polite"></div>
+          <div class="gallery-actions">
+            <button class="btn btn-secondary gallery-load-more" id="gallery-load-more" type="button">
+              Load more
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="sessions section reveal" aria-labelledby="session-types-title" hidden>
+        <div class="container">
+          <div class="section-head">
+            <h2 id="session-types-title">Session types</h2>
+            <p>Flexible formats for different stories, personalities, and seasons of life.</p>
+          </div>
+
+          <div class="session-grid">
+            <article class="session-card">
+              <div class="session-media frame-image" aria-hidden="true">
+                <img src="assets/images/thumbnails/library-catlina-aw-ig-13.webp" alt="" loading="lazy" decoding="async" />
+              </div>
+              <h3>Portraits</h3>
+              <p>Clean, expressive portraits for when you want to look like yourself — only sharper.</p>
+              <p class="best-for"><strong>Best for:</strong> personal portraits, profile updates, milestone moments.</p>
+              <a class="text-link booking-link" data-booking-link href="#contact">Ask about this session</a>
+            </article>
+
+            <article class="session-card">
+              <div class="session-media frame-image" aria-hidden="true">
+                <img src="assets/images/thumbnails/library-hochzeit-im-studio-88.webp" alt="" loading="lazy" decoding="async" />
+              </div>
+              <h3>Couples</h3>
+              <p>Romantic, playful, intimate, or completely chaotic. Preferably all four.</p>
+              <p class="best-for"><strong>Best for:</strong> anniversaries, engagement season, “just because” sessions.</p>
+              <a class="text-link booking-link" data-booking-link href="#contact">Ask about this session</a>
+            </article>
+
+            <article class="session-card">
+              <div class="session-media frame-image" aria-hidden="true">
+                <img src="assets/images/thumbnails/library-mittwochulu0129.webp" alt="" loading="lazy" decoding="async" />
+              </div>
+              <h3>Creative Editorial</h3>
+              <p>For dramatic lighting, bolder styling, and images with a little bite.</p>
+              <p class="best-for"><strong>Best for:</strong> fashion-led stories, concept shoots, creative direction.</p>
+              <a class="text-link booking-link" data-booking-link href="#contact">Ask about this session</a>
+            </article>
+
+            <article class="session-card">
+              <div class="session-media frame-image" aria-hidden="true">
+                <img src="assets/images/thumbnails/library-2look-natur-orig-18.webp" alt="" loading="lazy" decoding="async" />
+              </div>
+              <h3>Lifestyle</h3>
+              <p>Natural images with warmth, movement, and real personality.</p>
+              <p class="best-for"><strong>Best for:</strong> at-home stories, day-in-the-life sessions, family rhythm.</p>
+              <a class="text-link booking-link" data-booking-link href="#contact">Ask about this session</a>
+            </article>
+
+            <article class="session-card">
+              <div class="session-media frame-image" aria-hidden="true">
+                <img src="assets/images/thumbnails/library-a7405460b.webp" alt="" loading="lazy" decoding="async" />
+              </div>
+              <h3>Events</h3>
+              <p>Candid coverage for moments that should not disappear into someone’s camera roll.</p>
+              <p class="best-for"><strong>Best for:</strong> launches, birthdays, intimate celebrations.</p>
+              <a class="text-link booking-link" data-booking-link href="#contact">Ask about this session</a>
+            </article>
+
+            <article class="session-card">
+              <div class="session-media frame-image" aria-hidden="true">
+                <img src="assets/images/thumbnails/library-rumyana-ig-1-2.webp" alt="" loading="lazy" decoding="async" />
+              </div>
+              <h3>Branding</h3>
+              <p>Personal brand images that feel polished without becoming corporate wallpaper.</p>
+              <p class="best-for"><strong>Best for:</strong> founders, creators, service businesses.</p>
+              <a class="text-link booking-link" data-booking-link href="#contact">Ask about this session</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact section: the visible wording can be changed here. The form is already linked to Google Forms. -->
+      <!-- About Me section: update Ana's bio text here. The background photo is set in styles.css. -->
+      <section class="closing-cta section" id="about" aria-labelledby="closing-title">
+        <div class="closing-bg" aria-hidden="true"></div>
+        <div class="container reveal closing-inner">
+          <div class="closing-bio">
+            <h2 id="closing-title">Hey, I'm Ana</h2>
+            <p>
+              Hi, I’m Ana—a professionally trained photographer from Germany with over 10 years of
+              experience across portraits, events, and brand photography. My work has taken me
+              across Australia, with time spent living in Sydney and Darwin. I’m now based on the
+              Gold Coast, offering sessions across the region to create authentic, high-quality
+              images that represent your most meaningful moments and milestones.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact section reveal" id="contact" aria-labelledby="contact-title">
+        <div class="container contact-grid">
+          <div class="contact-copy">
+            <h2 id="contact-title" tabindex="-1">Let's create together</h2>
+            <p>
+              Share the essentials and I’ll follow up with availability, next steps, and the best
+              fit for your shoot.
+            </p>
+          </div>
+
+          <form
+            class="contact-card contact-form"
+            id="booking-form"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSfcekjBsArkRfEiZrwBeXv1v7Gg5kuwwtgHnTbd9n-oqqgunA/formResponse"
+            method="POST"
+            target="booking-form-target"
+          >
+            <div class="form-grid">
+              <div class="field">
+                <label class="form-label" for="booking-email">Email</label>
+                <input
+                  class="form-control"
+                  id="booking-email"
+                  name="emailAddress"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label class="form-label" for="booking-name">Your name</label>
+                <input
+                  class="form-control"
+                  id="booking-name"
+                  name="entry.741005754"
+                  type="text"
+                  autocomplete="name"
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label class="form-label" for="booking-phone">Phone number</label>
+                <input
+                  class="form-control"
+                  id="booking-phone"
+                  name="entry.1452168163"
+                  type="tel"
+                  autocomplete="tel"
+                  placeholder="+61 ..."
+                />
+              </div>
+
+              <div class="field">
+                <label class="form-label" for="booking-shoot">Choose Shoot</label>
+                <select class="form-control" id="booking-shoot" name="entry.1348587516">
+                  <option value="">Select a shoot type</option>
+                  <option value="Business">Business</option>
+                  <option value="Private">Private</option>
+                  <option value="Event">Event</option>
+                  <option value="Commercial">Commercial</option>
+                </select>
+              </div>
+
+              <div class="field field-full">
+                <label class="form-label" for="booking-message">Message</label>
+                <textarea
+                  class="form-control form-control-textarea"
+                  id="booking-message"
+                  name="entry.1686327555"
+                  rows="6"
+                  placeholder="Tell me about the mood, timing, location, and what you want this shoot to feel like."
+                ></textarea>
+              </div>
+            </div>
+
+            <input type="hidden" name="fvv" value="1" />
+            <input type="hidden" name="fbzx" value="1282646725773143806" />
+            <input type="hidden" name="partialResponse" value="[null,null,&quot;1282646725773143806&quot;]" />
+            <input type="hidden" name="pageHistory" value="0" />
+            <input type="hidden" name="submissionTimestamp" value="-1" />
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Send booking request</button>
+              <p class="form-note">
+                This sends directly into Ana’s booking workflow, without sending you off the site.
+              </p>
+            </div>
+
+            <p class="form-status" id="booking-form-status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <iframe
+          class="form-target"
+          name="booking-form-target"
+          id="booking-form-target"
+          title="Hidden booking form submission target"
+        ></iframe>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="brand footer-brand">
+            <img class="brand-logo" src="assets/icons/logo-ab.svg" alt="" width="44" height="44" />
+            <span>Behmen Studio by Ana Behmenburg</span>
+          </p>
+          <p class="footer-tagline">Portrait photography with warmth, direction, and style.</p>
+        </div>
+
+        <div>
+          <p><a href="https://www.instagram.com/anasta_behm/" target="_blank" rel="noreferrer">@anasta_behm</a></p>
+          <p>Location: Gold Coast, Australia</p>
+          <p class="designer-credit">
+            Website Designed by
+            <a href="https://alexzander73.github.io/index.html" target="_blank" rel="noreferrer">
+              Zach Mackay
+            </a>
+          </p>
+        </div>
+
+        <nav aria-label="Footer links" class="footer-links">
+          <a href="#gallery">Gallery</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Let's Create Together</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </nav>
+      </div>
+      <p class="copyright">
+        Copyright ©️ 2022 Anastasiya Behmenburg
+      </p>
+    </footer>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+      <button class="lightbox-close" type="button" aria-label="Close image">×</button>
+      <button class="lightbox-nav prev" type="button" aria-label="Previous image">←</button>
+      <figure class="lightbox-frame frame-image">
+        <img id="lightbox-image" src="" alt="" loading="lazy" decoding="async" />
+      </figure>
+      <button class="lightbox-nav next" type="button" aria-label="Next image">→</button>
+    </div>
+
+    <div class="admin-shell" id="admin-shell" aria-hidden="true" hidden>
+      <div class="admin-backdrop" data-admin-close="true"></div>
+      <aside class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+        <button class="admin-close" id="admin-close" type="button" aria-label="Close panel">×</button>
+        <h2 id="admin-title">Image Library</h2>
+        <p class="admin-note">
+          Changes are written directly to the linked GitHub repository.
+        </p>
+        <p class="form-status admin-status" id="admin-status" aria-live="polite"></p>
+
+        <div id="admin-login-panel">
+          <form id="admin-login-form" class="admin-form">
+            <label class="form-label" for="admin-password">Access key</label>
+            <input class="form-control" id="admin-password" name="admin-password" type="password" required />
+            <button class="btn btn-primary" type="submit">Unlock</button>
+          </form>
+        </div>
+
+        <div id="admin-github-panel" hidden>
+          <form id="admin-github-form" class="admin-form">
+            <h3>Connect GitHub</h3>
+            <label class="form-label" for="admin-github-token">GitHub token (repo contents write)</label>
+            <input class="form-control" id="admin-github-token" type="password" required />
+
+            <label class="form-label" for="admin-github-owner">Repo owner</label>
+            <input class="form-control" id="admin-github-owner" type="text" value="AnBehmen" required />
+
+            <label class="form-label" for="admin-github-repo">Repo name</label>
+            <input class="form-control" id="admin-github-repo" type="text" value="behmenstudio" required />
+
+            <label class="form-label" for="admin-github-branch">Branch</label>
+            <input class="form-control" id="admin-github-branch" type="text" value="main" required />
+
+            <button class="btn btn-primary" type="submit">Connect</button>
+          </form>
+        </div>
+
+        <div id="admin-work-panel" hidden>
+          <form id="admin-upload-form" class="admin-form">
+            <h3>Add Image</h3>
+            <label class="form-label" for="admin-image-file">Upload image file</label>
+            <input class="form-control" id="admin-image-file" type="file" accept="image/*" />
+
+            <label class="form-label" for="admin-src-path">Or image path / URL</label>
+            <input
+              class="form-control"
+              id="admin-src-path"
+              type="text"
+              placeholder="assets/images/web/new-image.webp"
+            />
+
+            <label class="form-label" for="admin-alt">Alt text</label>
+            <input class="form-control" id="admin-alt" type="text" required />
+
+            <label class="form-label" for="admin-category">Category</label>
+            <select class="form-control" id="admin-category"></select>
+
+            <label class="form-label" for="admin-mood">Mood</label>
+            <select class="form-control" id="admin-mood"></select>
+
+            <label class="form-label" for="admin-span">Grid span</label>
+            <input class="form-control" id="admin-span" type="number" min="20" max="56" value="36" />
+
+            <button class="btn btn-primary" type="submit">Add to Gallery</button>
+          </form>
+
+          <div class="admin-toolbar">
+            <button class="btn btn-secondary" id="admin-refresh-gallery" type="button">Refresh from GitHub</button>
+            <button class="btn btn-secondary" id="admin-logout" type="button">Lock</button>
+          </div>
+
+          <div class="admin-gallery-list" id="admin-gallery-list"></div>
+        </div>
+
+        <input id="admin-replace-file" type="file" accept="image/*" hidden />
+      </aside>
+    </div>
+
+    <script src="gallery-data.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="imageshelp.js" defer></script>
+  </body>
+</html>
