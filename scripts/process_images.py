@@ -266,6 +266,13 @@ def main() -> int:
             gallery_items, processed_count = apply_numbered_replacements(current_items, numbered_replacements)
             mode_label = "numbered-replacements"
         else:
+            if GALLERY_DATA_FILE.exists():
+                gallery_items = parse_gallery_data_items()
+                write_gallery_index(gallery_items)
+                print("No new uploads found. Refreshed gallery index from existing gallery-data.js.")
+                print(f"Gallery index updated: {GALLERY_INDEX_FILE}")
+                return 0
+
             print(
                 "No images found. Nothing to process. "
                 "Add files to assets/images/originals/ (full rebuild) or "
