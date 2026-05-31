@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const slotBySrc = buildSlotMap();
   annotateAllImages(slotBySrc);
+  annotateBackgroundImages();
   watchGalleryUpdates(slotBySrc);
 });
 
@@ -21,6 +22,59 @@ function buildSlotMap() {
 function annotateAllImages(slotBySrc) {
   document.querySelectorAll("img").forEach((img) => {
     addImageLabel(img, slotBySrc);
+  });
+}
+
+function annotateBackgroundImages() {
+  const selectors = [
+    ".hero-bg",
+    ".closing-bg",
+    ".session-media",
+    ".featured-stage",
+    ".lightbox-frame",
+    ".container",
+  ];
+
+  const candidates = new Set();
+  selectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((element) => candidates.add(element));
+  });
+
+  candidates.forEach((element) => {
+    if (!(element instanceof HTMLElement)) {
+      return;
+    }
+
+    if (element.querySelector(":scope > .background-badge")) {
+      return;
+    }
+
+    const backgroundImage = getComputedStyle(element).backgroundImage || "";
+    const urlMatch = backgroundImage.match(/url\\((['\"]?)(.*?)\\1\\)/);
+    if (!urlMatch || !urlMatch[2]) {
+      return;
+    }
+
+    const rawUrl = urlMatch[2];
+    if (!rawUrl.includes("/")) {
+      return;
+    }
+
+    const normalized = rawUrl.split("?")[0].split("#")[0];
+    const filename = normalized.split("/").pop();
+    if (!filename) {
+      return;
+    }
+
+    if (getComputedStyle(element).position === "static") {
+      element.style.position = "relative";
+    }
+
+    const badge = document.createElement("div");
+    badge.className = "filename-badge background-badge";
+    badge.textContent = `BG - ${filename}`;
+    badge.title = normalized;
+    element.appendChild(badge);
   });
 }
 

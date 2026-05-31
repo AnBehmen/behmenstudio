@@ -42,3 +42,8 @@
   word-break: break-word;
   pointer-events: none;
 }
+
+.background-badge {
+  top: 0.4rem;
+  bottom: auto;
+}

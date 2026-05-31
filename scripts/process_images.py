@@ -124,15 +124,11 @@ def build_gallery_items_from_originals(image_files: list[Path]) -> list[dict[str
         raise RuntimeError("No supported image files were found in assets/images/originals/")
 
     gallery_items: list[dict[str, object]] = []
-    used_slugs: set[str] = set()
 
-    for source in image_files:
+    for slot, source in enumerate(image_files, start=1):
         relative_path = source.relative_to(ORIGINALS_DIR)
-        base_slug = slugify("-".join(relative_path.with_suffix("").parts))
-        slug = unique_slug(f"library-{base_slug}", used_slugs)
-
-        web_output = WEB_DIR / f"{slug}.webp"
-        thumb_output = THUMB_DIR / f"{slug}.webp"
+        web_output = WEB_DIR / f"{slot}.webp"
+        thumb_output = THUMB_DIR / f"{slot}.webp"
 
         original_width, original_height = export_webp(source, web_output, WEB_MAX_SIZE)
         export_webp(source, thumb_output, THUMB_MAX_SIZE)
@@ -202,7 +198,7 @@ def apply_numbered_replacements(gallery_items: list[dict[str, object]], replacem
         if current_src.startswith("assets/images/web/") and current_src.endswith(".webp"):
             web_name = Path(current_src).name
         else:
-            web_name = f"library-slot-{slot:03d}.webp"
+            web_name = f"{slot}.webp"
 
         web_output = WEB_DIR / web_name
         thumb_output = THUMB_DIR / web_name

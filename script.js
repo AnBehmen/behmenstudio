@@ -22,73 +22,73 @@ const ADMIN_GALLERY_DATA_PATH = "gallery-data.js";
 // You can ignore it unless the featured carousel is added back later.
 const featuredSlides = [
   {
-    "src": "assets/images/web/library-titelbild-2000-19to9.webp",
+    "src": "assets/images/web/1.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Soft"
   },
   {
-    "src": "assets/images/web/library-catlina-aw-ig-12.webp",
+    "src": "assets/images/web/4.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Editorial"
   },
   {
-    "src": "assets/images/web/library-22-06-19-lara-alper-und-katja-188.webp",
+    "src": "assets/images/web/6.webp",
     "alt": "Couples session photograph from Behmen Studio portfolio",
     "category": "Couples",
     "mood": "Soft"
   },
   {
-    "src": "assets/images/web/library-mittwochulu0144.webp",
+    "src": "assets/images/web/7.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Editorial"
   },
   {
-    "src": "assets/images/web/library-6c7a8484.webp",
+    "src": "assets/images/web/8.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Bold"
   },
   {
-    "src": "assets/images/web/library-2look-natur-orig-10.webp",
+    "src": "assets/images/web/24.webp",
     "alt": "Lifestyle photography image from Behmen Studio portfolio",
     "category": "Lifestyle",
     "mood": "Soft"
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-37.webp",
+    "src": "assets/images/web/45.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody"
   },
   {
-    "src": "assets/images/web/library-073a4234-2-2k-2.webp",
+    "src": "assets/images/web/28.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Editorial"
   },
   {
-    "src": "assets/images/web/library-6c7a8452.webp",
+    "src": "assets/images/web/39.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Moody"
   },
   {
-    "src": "assets/images/web/library-a7401618.webp",
+    "src": "assets/images/web/25.webp",
     "alt": "Portrait photography image from Behmen Studio portfolio",
     "category": "Portrait",
     "mood": "Moody"
   },
   {
-    "src": "assets/images/web/library-dsc-6470.webp",
+    "src": "assets/images/web/60.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid"
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-69.webp",
+    "src": "assets/images/web/55.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid"
@@ -98,434 +98,434 @@ const featuredSlides = [
 // This is the fallback portfolio list. If gallery-data.js exists, it will override this list.
 const defaultGalleryItems = [
   {
-    "src": "assets/images/web/library-titelbild-2000-19to9.webp",
+    "src": "assets/images/web/1.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Soft",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-1691479-14-web-1900xv2.webp",
+    "src": "assets/images/web/2.webp",
     "alt": "Portrait photography image from Behmen Studio portfolio",
     "category": "Portrait",
     "mood": "Soft",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-rumyana-ig-1-2.webp",
+    "src": "assets/images/web/3.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Editorial",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-catlina-aw-ig-12.webp",
+    "src": "assets/images/web/4.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Editorial",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-hochzeit-im-studio-88.webp",
+    "src": "assets/images/web/5.webp",
     "alt": "Couples session photograph from Behmen Studio portfolio",
     "category": "Couples",
     "mood": "Candid",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-22-06-19-lara-alper-und-katja-188.webp",
+    "src": "assets/images/web/6.webp",
     "alt": "Couples session photograph from Behmen Studio portfolio",
     "category": "Couples",
     "mood": "Soft",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-mittwochulu0144.webp",
+    "src": "assets/images/web/7.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Editorial",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-6c7a8484.webp",
+    "src": "assets/images/web/8.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Bold",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-dsc-2743.webp",
+    "src": "assets/images/web/9.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Bold",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-30.webp",
+    "src": "assets/images/web/10.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-2look-natur-orig-18.webp",
+    "src": "assets/images/web/11.webp",
     "alt": "Lifestyle photography image from Behmen Studio portfolio",
     "category": "Lifestyle",
     "mood": "Candid",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-a7401944.webp",
+    "src": "assets/images/web/12.webp",
     "alt": "Portrait photography image from Behmen Studio portfolio",
     "category": "Portrait",
     "mood": "Soft",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-073a4501-2-3-2-3-2.webp",
+    "src": "assets/images/web/13.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Moody",
     "span": 40
   },
   {
-    "src": "assets/images/web/library-catlina-aw-ig-13.webp",
+    "src": "assets/images/web/14.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Bold",
     "span": 40
   },
   {
-    "src": "assets/images/web/library-22-06-19-lara-alper-und-katja-17.webp",
+    "src": "assets/images/web/15.webp",
     "alt": "Couples session photograph from Behmen Studio portfolio",
     "category": "Couples",
     "mood": "Romantic",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-a7401958.webp",
+    "src": "assets/images/web/16.webp",
     "alt": "Portrait photography image from Behmen Studio portfolio",
     "category": "Portrait",
     "mood": "Moody",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-a7405460b.webp",
+    "src": "assets/images/web/17.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Bold",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-6c7a8437.webp",
+    "src": "assets/images/web/18.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Bold",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-dsc-2334.webp",
+    "src": "assets/images/web/19.webp",
     "alt": "Portrait photography image from Behmen Studio portfolio",
     "category": "Portrait",
     "mood": "Bold",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-rumyana-ig-1-3.webp",
+    "src": "assets/images/web/20.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Bold",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-dsc-2803.webp",
+    "src": "assets/images/web/21.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Soft",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-22-06-19-lara-alper-und-katja-35.webp",
+    "src": "assets/images/web/22.webp",
     "alt": "Couples session photograph from Behmen Studio portfolio",
     "category": "Couples",
     "mood": "Candid",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-56.webp",
+    "src": "assets/images/web/23.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-2look-natur-orig-10.webp",
+    "src": "assets/images/web/24.webp",
     "alt": "Lifestyle photography image from Behmen Studio portfolio",
     "category": "Lifestyle",
     "mood": "Soft",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-a7401618.webp",
+    "src": "assets/images/web/25.webp",
     "alt": "Portrait photography image from Behmen Studio portfolio",
     "category": "Portrait",
     "mood": "Moody",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-catlina-aw-ig-2.webp",
+    "src": "assets/images/web/26.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Soft",
     "span": 40
   },
   {
-    "src": "assets/images/web/library-22-06-19-lara-alper-und-katja-60.webp",
+    "src": "assets/images/web/27.webp",
     "alt": "Couples session photograph from Behmen Studio portfolio",
     "category": "Couples",
     "mood": "Romantic",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-073a4234-2-2k-2.webp",
+    "src": "assets/images/web/28.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Editorial",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-26.webp",
+    "src": "assets/images/web/29.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-a7401711.webp",
+    "src": "assets/images/web/30.webp",
     "alt": "Portrait photography image from Behmen Studio portfolio",
     "category": "Portrait",
     "mood": "Bold",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-catlina-aw-ig-6.webp",
+    "src": "assets/images/web/31.webp",
     "alt": "Brand portrait photograph from Behmen Studio portfolio",
     "category": "Branding",
     "mood": "Editorial",
     "span": 40
   },
   {
-    "src": "assets/images/web/library-22-06-19-lara-alper-und-katja-79.webp",
+    "src": "assets/images/web/32.webp",
     "alt": "Couples session photograph from Behmen Studio portfolio",
     "category": "Couples",
     "mood": "Soft",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-073a4442-2-3-4.webp",
+    "src": "assets/images/web/33.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Bold",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-27.webp",
+    "src": "assets/images/web/34.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-a7401873.webp",
+    "src": "assets/images/web/35.webp",
     "alt": "Portrait photography image from Behmen Studio portfolio",
     "category": "Portrait",
     "mood": "Editorial",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-073a4568-2-4-kopie.webp",
+    "src": "assets/images/web/36.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Editorial",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-28.webp",
+    "src": "assets/images/web/37.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Bold",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-dsc-2343.webp",
+    "src": "assets/images/web/38.webp",
     "alt": "Portrait photography image from Behmen Studio portfolio",
     "category": "Portrait",
     "mood": "Editorial",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-6c7a8452.webp",
+    "src": "assets/images/web/39.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Moody",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-29.webp",
+    "src": "assets/images/web/40.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-6c7a8467.webp",
+    "src": "assets/images/web/41.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Editorial",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-31.webp",
+    "src": "assets/images/web/42.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Bold",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-mittwochulu0129.webp",
+    "src": "assets/images/web/43.webp",
     "alt": "Creative editorial portrait from Behmen Studio portfolio",
     "category": "Creative",
     "mood": "Moody",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-32.webp",
+    "src": "assets/images/web/44.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-37.webp",
+    "src": "assets/images/web/45.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-45.webp",
+    "src": "assets/images/web/46.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Bold",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-55.webp",
+    "src": "assets/images/web/47.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-57.webp",
+    "src": "assets/images/web/48.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Bold",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-58.webp",
+    "src": "assets/images/web/49.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-59.webp",
+    "src": "assets/images/web/50.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-6.webp",
+    "src": "assets/images/web/51.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Bold",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-60.webp",
+    "src": "assets/images/web/52.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-61.webp",
+    "src": "assets/images/web/53.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-64.webp",
+    "src": "assets/images/web/54.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Bold",
     "span": 40
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-69.webp",
+    "src": "assets/images/web/55.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-26portfolio-ev-beispiele-70.webp",
+    "src": "assets/images/web/56.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-a7405463b.webp",
+    "src": "assets/images/web/57.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-dsc-6376.webp",
+    "src": "assets/images/web/58.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-dsc-6420.webp",
+    "src": "assets/images/web/59.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Bold",
     "span": 45
   },
   {
-    "src": "assets/images/web/library-dsc-6470.webp",
+    "src": "assets/images/web/60.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Candid",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-dsc-6527.webp",
+    "src": "assets/images/web/61.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Moody",
     "span": 28
   },
   {
-    "src": "assets/images/web/library-dsc-6755.webp",
+    "src": "assets/images/web/62.webp",
     "alt": "Event photography image from Behmen Studio portfolio",
     "category": "Events",
     "mood": "Bold",
