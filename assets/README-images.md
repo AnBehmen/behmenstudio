@@ -35,7 +35,7 @@ If she wants to replace only one existing gallery image:
 
 1. Open `assets/images/gallery-index.csv`
 2. Find the `slot` number of the image to replace
-3. Upload a new original photo into `assets/images/originals/inbox/`
+3. Upload a new original photo into `assets/images/originals/replace-by-number/`
 4. Start the replacement filename with that slot number:
    - `12-new-photo.jpg`
    - `034-better-version.png`
@@ -46,13 +46,13 @@ What happens automatically:
 - the workflow resizes the photo
 - replaces that exact slot image on the live site
 - updates `gallery-data.js`
-- removes the uploaded original from `inbox/` to keep it clean
+- removes the uploaded original from `replace-by-number/` to keep it clean
 
 Important:
 
 - only one mode per run:
   - full rebuild: upload to `assets/images/originals/`
-  - slot replace: upload to `assets/images/originals/inbox/`
+  - slot replace: upload to `assets/images/originals/replace-by-number/`
 - do not upload to both locations in the same commit
 
 ## What goes where

@@ -12,7 +12,7 @@ from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGINALS_DIR = ROOT / "assets" / "images" / "originals"
-INBOX_DIR = ORIGINALS_DIR / "inbox"
+REPLACEMENTS_DIR = ORIGINALS_DIR / "replace-by-number"
 WEB_DIR = ROOT / "assets" / "images" / "web"
 THUMB_DIR = ROOT / "assets" / "images" / "thumbnails"
 GALLERY_DATA_FILE = ROOT / "gallery-data.js"
@@ -100,11 +100,11 @@ def list_supported_images(directory: Path) -> list[Path]:
 
 def list_regular_originals() -> list[Path]:
     all_images = list_supported_images(ORIGINALS_DIR)
-    return [path for path in all_images if not is_within(path, INBOX_DIR)]
+    return [path for path in all_images if not is_within(path, REPLACEMENTS_DIR)]
 
 
-def list_inbox_images() -> list[Path]:
-    return list_supported_images(INBOX_DIR)
+def list_replacement_images() -> list[Path]:
+    return list_supported_images(REPLACEMENTS_DIR)
 
 
 def export_webp(source: Path, destination: Path, max_size: int) -> tuple[int, int]:
@@ -250,26 +250,26 @@ def write_gallery_index(items: list[dict[str, object]]) -> None:
 def main() -> int:
     try:
         regular_originals = list_regular_originals()
-        inbox_replacements = list_inbox_images()
+        numbered_replacements = list_replacement_images()
 
-        if regular_originals and inbox_replacements:
+        if regular_originals and numbered_replacements:
             raise RuntimeError(
-                "Use one mode at a time: either regular originals OR inbox replacements, not both in one run."
+                "Use one mode at a time: either regular originals OR numbered replacements, not both in one run."
             )
 
         if regular_originals:
             gallery_items = build_gallery_items_from_originals(regular_originals)
             processed_count = len(gallery_items)
             mode_label = "full-rebuild"
-        elif inbox_replacements:
+        elif numbered_replacements:
             current_items = parse_gallery_data_items()
-            gallery_items, processed_count = apply_numbered_replacements(current_items, inbox_replacements)
-            mode_label = "slot-replacements"
+            gallery_items, processed_count = apply_numbered_replacements(current_items, numbered_replacements)
+            mode_label = "numbered-replacements"
         else:
             print(
                 "No images found. Nothing to process. "
                 "Add files to assets/images/originals/ (full rebuild) or "
-                "assets/images/originals/inbox/ (slot replacements)."
+                "assets/images/originals/replace-by-number/ (slot replacements)."
             )
             return 0
 
