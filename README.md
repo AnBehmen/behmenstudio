@@ -404,24 +404,6 @@ Check these:
 - the portfolio filters still work
 - the footer links still work
 
-## Admin note
-
-Admin access setup and credentials should be documented privately, not in this public README.
-
-If you want to change the admin password:
-
-1. generate a SHA-256 hash for your new password
-2. replace `ADMIN_PASSWORD_HASH` in `script.js`
-
-Example hash command:
-
-```bash
-python3 - <<'PY'
-import hashlib
-print(hashlib.sha256("your-new-password".encode()).hexdigest())
-PY
-```
-
 ## Helpful note if you get stuck
 
 If you ask someone else to help later, tell them:

@@ -1599,7 +1599,7 @@ function initAdminMode(galleryApi) {
     githubBranchInput.value = githubBranchInput.value || ADMIN_DEFAULT_REPO_BRANCH;
 
     try {
-      const savedToken = window.sessionStorage.getItem(ADMIN_GITHUB_TOKEN_STORAGE_KEY);
+      const savedToken = window.localStorage.getItem(ADMIN_GITHUB_TOKEN_STORAGE_KEY);
       if (savedToken && !githubTokenInput.value) {
         githubTokenInput.value = savedToken;
       }
@@ -1612,9 +1612,9 @@ function initAdminMode(galleryApi) {
       setRepoConnectedState(Boolean(repoContext));
       if (repoContext) {
         renderAdminList();
-        setStatus("Admin mode unlocked and connected to GitHub.", "success");
+        setStatus("Panel unlocked and connected to GitHub.", "success");
       } else {
-        setStatus("Admin mode unlocked. Connect GitHub to edit live files.");
+        setStatus("Panel unlocked. Connect GitHub to edit live files.");
       }
       return;
     }
@@ -1622,7 +1622,7 @@ function initAdminMode(galleryApi) {
     loginPanel.hidden = false;
     githubPanel.hidden = true;
     workPanel.hidden = true;
-    setStatus("Enter admin password to unlock image controls.");
+    setStatus("Enter access key to unlock image controls.");
     passwordInput.value = "";
     passwordInput.focus();
   };
@@ -1689,13 +1689,13 @@ function initAdminMode(galleryApi) {
           const removedPath = removedItem?.src ?? "";
           if (
             typeof removedPath === "string" &&
-            removedPath.startsWith("assets/images/web/admin-") &&
+            removedPath.startsWith("assets/images/web/gallery-") &&
             !nextItems.some((item) => item.src === removedPath)
           ) {
-            await deleteRepoFile(repoContext, removedPath, `admin: remove image file ${removedPath}`);
+            await deleteRepoFile(repoContext, removedPath, `remove image file ${removedPath}`);
           }
 
-          await commitGalleryItems(repoContext, nextItems, "admin: remove gallery image");
+          await commitGalleryItems(repoContext, nextItems, "remove gallery image");
           galleryApi.refresh();
           renderAdminList();
           setStatus("Image removed and pushed to GitHub.", "success");
@@ -1753,7 +1753,7 @@ function initAdminMode(galleryApi) {
     setAuthenticated(true);
     loginPanel.hidden = true;
     setRepoConnectedState(Boolean(repoContext));
-    setStatus("Admin mode unlocked. Connect GitHub to apply live changes.", "success");
+    setStatus("Panel unlocked. Connect GitHub to apply live changes.", "success");
   });
 
   githubForm.addEventListener("submit", (event) => {
@@ -1768,7 +1768,7 @@ function initAdminMode(galleryApi) {
       await syncGalleryFromRepo(nextContext);
       repoContext = nextContext;
       try {
-        window.sessionStorage.setItem(ADMIN_GITHUB_TOKEN_STORAGE_KEY, nextContext.token);
+        window.localStorage.setItem(ADMIN_GITHUB_TOKEN_STORAGE_KEY, nextContext.token);
       } catch (error) {
         // Ignore storage failures.
       }
@@ -1808,13 +1808,13 @@ function initAdminMode(galleryApi) {
 
         const extension = getFileExtension(selectedFile);
         const name = selectedFile.name.replace(/\.[^.]+$/, "");
-        const path = `assets/images/web/admin-${Date.now()}-${slugifyName(name)}.${extension}`;
+        const path = `assets/images/web/gallery-${Date.now()}-${slugifyName(name)}.${extension}`;
         const fileBytes = await readFileBytes(selectedFile);
         await writeRepoFile(
           repoContext,
           path,
           toBase64FromBytes(fileBytes),
-          `admin: upload ${selectedFile.name}`
+          `upload ${selectedFile.name}`
         );
         src = path;
       }
@@ -1833,7 +1833,7 @@ function initAdminMode(galleryApi) {
       }
 
       const nextItems = [...galleryItems, nextItem];
-      await commitGalleryItems(repoContext, nextItems, "admin: add gallery image");
+      await commitGalleryItems(repoContext, nextItems, "add gallery image");
 
       uploadForm.reset();
       spanInput.value = "36";
@@ -1870,12 +1870,12 @@ function initAdminMode(galleryApi) {
 
       const currentSrc = existing.src;
       const canOverwriteExisting =
-        currentSrc.startsWith("assets/") && !currentSrc.startsWith("assets/images/web/admin-");
+        currentSrc.startsWith("assets/") && !currentSrc.startsWith("assets/images/web/gallery-");
       const extension = getFileExtension(selectedFile);
       const name = selectedFile.name.replace(/\.[^.]+$/, "");
       const uploadPath = canOverwriteExisting
         ? currentSrc
-        : `assets/images/web/admin-${Date.now()}-${slugifyName(name)}.${extension}`;
+        : `assets/images/web/gallery-${Date.now()}-${slugifyName(name)}.${extension}`;
       const fileBytes = await readFileBytes(selectedFile);
 
       let existingSha;
@@ -1894,19 +1894,19 @@ function initAdminMode(galleryApi) {
         repoContext,
         uploadPath,
         toBase64FromBytes(fileBytes),
-        `admin: replace image ${uploadPath}`,
+        `replace image ${uploadPath}`,
         existingSha
       );
 
       nextItems[replaceIndex] = normalizeGalleryItem({ ...existing, src: uploadPath }) ?? existing;
-      await commitGalleryItems(repoContext, nextItems, "admin: update gallery after replace");
+      await commitGalleryItems(repoContext, nextItems, "update gallery after replace");
 
       if (
-        currentSrc.startsWith("assets/images/web/admin-") &&
+        currentSrc.startsWith("assets/images/web/gallery-") &&
         currentSrc !== uploadPath &&
         !nextItems.some((item, itemIndex) => itemIndex !== replaceIndex && item.src === currentSrc)
       ) {
-        await deleteRepoFile(repoContext, currentSrc, `admin: remove replaced image file ${currentSrc}`);
+        await deleteRepoFile(repoContext, currentSrc, `remove replaced image file ${currentSrc}`);
       }
 
       replaceInput.value = "";
@@ -1942,12 +1942,7 @@ function initAdminMode(galleryApi) {
     githubPanel.hidden = true;
     loginPanel.hidden = false;
     passwordInput.value = "";
-    try {
-      window.sessionStorage.removeItem(ADMIN_GITHUB_TOKEN_STORAGE_KEY);
-    } catch (error) {
-      // Ignore storage failures.
-    }
-    setStatus("Admin mode locked.");
+    setStatus("Panel locked.");
     passwordInput.focus();
   });
 
@@ -1976,13 +1971,13 @@ function initAdminMode(galleryApi) {
         typedSecret = "";
       }, 1200);
 
-      if (typedSecret.endsWith("admin")) {
+      if (typedSecret.endsWith("libraryedit")) {
         openAdmin();
       }
     }
   });
 
-  if (window.location.hash === "#admin") {
+  if (window.location.hash === "#library") {
     openAdmin();
   }
 }
