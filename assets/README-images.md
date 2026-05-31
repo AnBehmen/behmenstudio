@@ -11,6 +11,24 @@ This folder system is set up to keep your original photos safe while also keepin
 
 Running the processor again refreshes the portfolio from whatever is currently inside `originals/`.
 
+## Easiest GitHub-website workflow (no local app needed)
+
+If using the GitHub website on an older laptop:
+
+1. Open the repository in GitHub
+2. Open `assets/images/originals/`
+3. Click `Add file` -> `Upload files`
+4. Drag in the new photos and commit
+5. Wait for the `Process Gallery Images` action to finish
+
+That action auto-generates:
+
+- `assets/images/web/`
+- `assets/images/thumbnails/`
+- `gallery-data.js`
+
+and commits them automatically, so the site updates on GitHub Pages.
+
 ## What goes where
 
 ### `assets/images/originals/`
