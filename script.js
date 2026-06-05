@@ -943,8 +943,13 @@ function initNavigation() {
 }
 
 function initScrollReveal() {
-  const revealItems = document.querySelectorAll(".reveal");
+  const revealItems = document.querySelectorAll(".reveal:not(#gallery)");
+  const gallerySection = document.getElementById("gallery");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (gallerySection) {
+    gallerySection.classList.add("is-visible");
+  }
 
   if (reducedMotion || !("IntersectionObserver" in window)) {
     revealItems.forEach((item) => item.classList.add("is-visible"));
@@ -1102,6 +1107,26 @@ function initMoodGallery() {
   let filteredItems = [...galleryItems];
   let lightboxIndex = 0;
   let visibleCount = 0;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cardObserver =
+    !reducedMotion && "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          (entries, currentObserver) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) {
+                return;
+              }
+
+              entry.target.classList.add("is-visible");
+              currentObserver.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.01,
+            rootMargin: "0px 0px 28% 0px"
+          }
+        )
+      : null;
 
   const getAvailableFilters = () => [
     "All",
@@ -1200,26 +1225,20 @@ function initMoodGallery() {
     renderLightbox();
   };
 
-  const renderGrid = () => {
-    ensureValidActiveFilter();
-    filteredItems =
-      activeFilter === "All"
-        ? [...galleryItems]
-        : galleryItems.filter((item) => item.mood === activeFilter);
-
-    grid.innerHTML = "";
-
-    if (!filteredItems.length) {
-      const empty = document.createElement("p");
-      empty.textContent = "No images in this mood yet. Add more gallery items in script.js.";
-      grid.appendChild(empty);
-      loadMoreBtn.hidden = true;
+  const revealCard = (card, revealIndex) => {
+    if (!cardObserver) {
+      card.classList.add("is-visible");
       return;
     }
 
-    const visibleItems = filteredItems.slice(0, visibleCount);
+    card.classList.add("gallery-item-reveal");
+    card.style.setProperty("--gallery-reveal-delay", `${Math.min(revealIndex, 11) * 70}ms`);
+    cardObserver.observe(card);
+  };
 
-    visibleItems.forEach((item, itemIndex) => {
+  const appendGridItems = (items, startIndex) => {
+    items.forEach((item, localIndex) => {
+      const itemIndex = startIndex + localIndex;
       const card = document.createElement("button");
       card.className = "gallery-item";
       card.type = "button";
@@ -1251,7 +1270,28 @@ function initMoodGallery() {
       });
 
       grid.appendChild(card);
+      revealCard(card, localIndex);
     });
+  };
+
+  const renderGrid = () => {
+    ensureValidActiveFilter();
+    filteredItems =
+      activeFilter === "All"
+        ? [...galleryItems]
+        : galleryItems.filter((item) => item.mood === activeFilter);
+
+    grid.innerHTML = "";
+
+    if (!filteredItems.length) {
+      const empty = document.createElement("p");
+      empty.textContent = "No images in this mood yet. Add more gallery items in script.js.";
+      grid.appendChild(empty);
+      loadMoreBtn.hidden = true;
+      return;
+    }
+
+    appendGridItems(filteredItems.slice(0, visibleCount), 0);
 
     loadMoreBtn.hidden = visibleCount >= filteredItems.length;
     markMissingImagesOnError(grid);
@@ -1264,8 +1304,14 @@ function initMoodGallery() {
   };
 
   loadMoreBtn.addEventListener("click", () => {
+    const previousVisibleCount = visibleCount;
     visibleCount += getBatchSize();
-    renderGrid();
+    appendGridItems(
+      filteredItems.slice(previousVisibleCount, visibleCount),
+      previousVisibleCount
+    );
+    loadMoreBtn.hidden = visibleCount >= filteredItems.length;
+    markMissingImagesOnError(grid);
   });
 
   closeBtn.addEventListener("click", closeLightbox);
