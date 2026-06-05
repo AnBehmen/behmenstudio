@@ -35,8 +35,8 @@
     </script>
     <link id="site-favicon" rel="icon" type="image/svg+xml" href="assets/icons/logo-ab.svg" />
     <link rel="preload" as="image" href="assets/images/web/hero-main.webp" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="imageshelp.css" />
+    <link rel="stylesheet" href="styles.css?v=20260606-compat" />
+    <link rel="stylesheet" href="imageshelp.css?v=20260606-compat" />
   </head>
   <body class="imageshelp-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -186,9 +186,46 @@
           <!-- Portfolio filters are built automatically from the gallery data in gallery-data.js. -->
           <div class="filter-row" id="gallery-filters" role="toolbar" aria-label="Gallery filter buttons"></div>
 
-          <div class="gallery-grid" id="gallery-grid" aria-live="polite"></div>
+          <div class="gallery-grid" id="gallery-grid" aria-live="polite">
+            <button class="gallery-item" type="button" style="--span: 28" aria-label="Portfolio image">
+              <img src="assets/images/web/1.webp" alt="Brand portrait photograph from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 45" aria-label="Portfolio image">
+              <img src="assets/images/web/2.webp" alt="Portrait photography image from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 45" aria-label="Portfolio image">
+              <img src="assets/images/web/3.webp" alt="Brand portrait photograph from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 28" aria-label="Portfolio image">
+              <img src="assets/images/web/4.webp" alt="Brand portrait photograph from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 45" aria-label="Portfolio image">
+              <img src="assets/images/web/5.webp" alt="Couples session photograph from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 28" aria-label="Portfolio image">
+              <img src="assets/images/web/6.webp" alt="Couples session photograph from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 28" aria-label="Portfolio image">
+              <img src="assets/images/web/7.webp" alt="Creative editorial portrait from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 28" aria-label="Portfolio image">
+              <img src="assets/images/web/8.webp" alt="Creative editorial portrait from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 45" aria-label="Portfolio image">
+              <img src="assets/images/web/9.webp" alt="Brand portrait photograph from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 45" aria-label="Portfolio image">
+              <img src="assets/images/web/10.webp" alt="Event photography image from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 45" aria-label="Portfolio image">
+              <img src="assets/images/web/11.webp" alt="Lifestyle photography image from Behmen Studio portfolio" loading="lazy" />
+            </button>
+            <button class="gallery-item" type="button" style="--span: 45" aria-label="Portfolio image">
+              <img src="assets/images/web/12.webp" alt="Portrait photography image from Behmen Studio portfolio" loading="lazy" />
+            </button>
+          </div>
           <div class="gallery-actions">
-            <button class="btn btn-secondary gallery-load-more" id="gallery-load-more" type="button">
+            <button class="btn btn-secondary gallery-load-more" id="gallery-load-more" type="button" hidden>
               Load more
             </button>
           </div>
@@ -510,8 +547,9 @@
       </aside>
     </div>
 
-    <script src="gallery-data.js" defer></script>
-    <script src="script.js" defer></script>
-    <script src="imageshelp.js" defer></script>
+    <script src="gallery-data.js?v=20260606-compat" defer></script>
+    <script src="script.js?v=20260606-compat" defer></script>
+    <script src="image-library.js?v=20260606-compat" defer></script>
+    <script src="imageshelp.js?v=20260606-compat" defer></script>
   </body>
 </html>
