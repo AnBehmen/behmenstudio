@@ -30,7 +30,7 @@ python3 -m http.server 8080
 | Live portfolio image list (preferred source) | `gallery-data.js` |
 | Fallback gallery list inside JS (legacy/duplicate) | `script.js` (`defaultGalleryItems`) |
 | In-browser image admin (GitHub token flow) | `image-library.js` + admin markup in `index.html` |
-| Legal | `privacy.html`, `terms.html` |
+| Legal | `privacy.html`, `terms.html` (same design language as one-pager) |
 | Internal image helper UI | `imageshelp.html` (+ `.css` / `.js`) |
 | Process originals → web/thumbs + regenerate gallery data | `scripts/process_images.py`, `process-images.command` |
 | Handover / hosting docs (client-facing) | `README.md`, `HANDOVER-CHECKLIST.md` |
@@ -98,6 +98,7 @@ Hero photo (temporary remote; optimize to local WebP later):
 ### Pending (later iterations)
 
 - [ ] Contact form field/button visual polish (optional further pass)
+- [ ] Optional: restyle internal `imageshelp.html` (noindex helper; not public)
 - [ ] Self-host Staatliches + Schibsted Grotesk under `assets/fonts/`
 - [ ] Optimize hero image → local WebP (stop Webflow CDN dependency)
 - [ ] Further Webflow parity pass (spacing, motion, exact type scales)
@@ -113,6 +114,7 @@ Hero photo (temporary remote; optimize to local WebP later):
 - [x] Portfolio Embla carousel (CDN for now; vendor later)
 - [x] Portfolio cinematic strip + local Embla/Autoplay (`vendor/embla/`, stop on interaction)
 - [x] Contact green section, centered form without colored card chrome
+- [x] Privacy + Terms restyled to match redesign (header/footer/type)
 - [x] Load Staatliches + Schibsted Grotesk via remote woff2 for now
 
 ## Design reference (Webflow)
