@@ -645,31 +645,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  runInitializer("Saved theme", applySavedTheme);
-  runInitializer("Copyright year", setYear);
-  runInitializer("Theme selector", initThemeSelector);
   runInitializer("Contact form", initContactForm);
   runInitializer("Booking links", wireBookingLinks);
   runInitializer("Navigation", initNavigation);
-  runInitializer("Scroll reveal", initScrollReveal);
   runInitializer("Image error handling", () => markMissingImagesOnError(document));
 
-  const carouselApi =
-    runInitializer("Featured carousel", initFeaturedCarousel, null) || {
-      previous: () => {},
-      next: () => {}
-    };
   const galleryApi =
-    runInitializer("Gallery", initMoodGallery, null) || {
+    runInitializer("Portfolio carousel", initPortfolioCarousel, null) || {
       closeLightbox: () => {},
       previousLightbox: () => {},
       nextLightbox: () => {},
+      previous: () => {},
+      next: () => {},
       refresh: () => {}
     };
-  runInitializer("Image library", () => initAdminMode(galleryApi));
-
-  runInitializer("Testimonials", initTestimonials);
-  runInitializer("FAQs", initFaqs);
+  runInitializer("Image library", () => {
+    if (typeof initAdminMode === "function") {
+      initAdminMode(galleryApi);
+    }
+  });
 
   document.addEventListener("keydown", (event) => {
     const lightbox = document.getElementById("lightbox");
@@ -684,7 +678,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (lightboxOpen) {
         galleryApi.previousLightbox();
       } else {
-        carouselApi.previous();
+        galleryApi.previous();
       }
     }
 
@@ -692,7 +686,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (lightboxOpen) {
         galleryApi.nextLightbox();
       } else {
-        carouselApi.next();
+        galleryApi.next();
       }
     }
   });
@@ -1084,97 +1078,67 @@ function initFeaturedCarousel() {
   return { next, previous };
 }
 
-function initMoodGallery() {
-  const grid = document.getElementById("gallery-grid");
-  const loadMoreBtn = document.getElementById("gallery-load-more");
-  const filters = document.getElementById("gallery-filters");
+function initPortfolioCarousel() {
+  const viewport = document.getElementById("portfolio-viewport");
+  const track = document.getElementById("portfolio-track");
+  const prevControl = document.getElementById("portfolio-prev");
+  const nextControl = document.getElementById("portfolio-next");
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightbox-image");
   const closeBtn = document.querySelector(".lightbox-close");
   const prevBtn = document.querySelector(".lightbox-nav.prev");
   const nextBtn = document.querySelector(".lightbox-nav.next");
 
-  if (!grid || !loadMoreBtn || !filters || !lightbox || !lightboxImage || !closeBtn || !prevBtn || !nextBtn) {
-    return {
-      closeLightbox: () => {},
-      previousLightbox: () => {},
-      nextLightbox: () => {},
-      refresh: () => {}
-    };
+  const emptyApi = {
+    closeLightbox: () => {},
+    previousLightbox: () => {},
+    nextLightbox: () => {},
+    previous: () => {},
+    next: () => {},
+    refresh: () => {}
+  };
+
+  if (
+    !viewport ||
+    !track ||
+    !prevControl ||
+    !nextControl ||
+    !lightbox ||
+    !lightboxImage ||
+    !closeBtn ||
+    !prevBtn ||
+    !nextBtn
+  ) {
+    return emptyApi;
   }
 
-  let activeFilter = "All";
-  let filteredItems = [...galleryItems];
+  let items = [...galleryItems];
   let lightboxIndex = 0;
-  let visibleCount = 0;
+  let embla = null;
+  let autoplayHalted = false;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const cardObserver =
-    !reducedMotion && "IntersectionObserver" in window
-      ? new IntersectionObserver(
-          (entries, currentObserver) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) {
-                return;
-              }
 
-              entry.target.classList.add("is-visible");
-              currentObserver.unobserve(entry.target);
-            });
-          },
-          {
-            threshold: 0.01,
-            rootMargin: "0px 0px 28% 0px"
-          }
-        )
-      : null;
+  const getAutoplay = () => embla?.plugins?.()?.autoplay ?? null;
 
-  const getAvailableFilters = () => [
-    "All",
-    ...new Set(
-      galleryItems
-        .map((item) => item.mood)
-        .filter((mood) => typeof mood === "string" && mood.trim() && mood.trim() !== "All")
-    )
-  ];
-
-  const getBatchSize = () => (window.matchMedia("(max-width: 759px)").matches ? 8 : 12);
-  const resetVisibleCount = () => {
-    visibleCount = getBatchSize();
+  const haltAutoplay = () => {
+    autoplayHalted = true;
+    getAutoplay()?.stop();
   };
-  const ensureValidActiveFilter = () => {
-    const filtersForData = getAvailableFilters();
-    if (activeFilter !== "All" && !filtersForData.includes(activeFilter)) {
-      activeFilter = "All";
+
+  const onViewportEnter = () => {
+    if (!autoplayHalted) {
+      getAutoplay()?.stop();
     }
   };
 
-  const renderFilterButtons = () => {
-    filters.innerHTML = "";
-    const availableFilters = getAvailableFilters();
-    const filterList = availableFilters.length <= 2 ? ["All"] : availableFilters;
-
-    filterList.forEach((filterName) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "filter-btn";
-      button.dataset.filter = filterName;
-      button.textContent = filterName;
-      button.classList.toggle("is-active", filterName === activeFilter);
-
-      button.addEventListener("click", () => {
-        activeFilter = filterName;
-        filters.querySelectorAll(".filter-btn").forEach((btn) => btn.classList.remove("is-active"));
-        button.classList.add("is-active");
-        resetVisibleCount();
-        renderGrid();
-      });
-
-      filters.appendChild(button);
-    });
+  const onViewportLeave = () => {
+    if (!autoplayHalted) {
+      getAutoplay()?.play();
+    }
   };
 
   const renderLightbox = () => {
-    const item = filteredItems[lightboxIndex];
+    const item = items[lightboxIndex];
     if (!item) {
       return;
     }
@@ -1195,6 +1159,7 @@ function initMoodGallery() {
   };
 
   const openLightbox = (index) => {
+    haltAutoplay();
     lightboxIndex = index;
     renderLightbox();
     lightbox.classList.add("is-open");
@@ -1210,110 +1175,141 @@ function initMoodGallery() {
   };
 
   const nextLightbox = () => {
-    if (!filteredItems.length) {
+    if (!items.length) {
       return;
     }
-    lightboxIndex = (lightboxIndex + 1) % filteredItems.length;
+    lightboxIndex = (lightboxIndex + 1) % items.length;
     renderLightbox();
   };
 
   const previousLightbox = () => {
-    if (!filteredItems.length) {
+    if (!items.length) {
       return;
     }
-    lightboxIndex = (lightboxIndex - 1 + filteredItems.length) % filteredItems.length;
+    lightboxIndex = (lightboxIndex - 1 + items.length) % items.length;
     renderLightbox();
   };
 
-  const revealCard = (card, revealIndex) => {
-    if (!cardObserver) {
-      card.classList.add("is-visible");
+  const previous = () => {
+    haltAutoplay();
+    if (embla) {
+      embla.scrollPrev();
+    }
+  };
+
+  const next = () => {
+    haltAutoplay();
+    if (embla) {
+      embla.scrollNext();
+    }
+  };
+
+  const buildSlides = () => {
+    track.innerHTML = "";
+    galleryItems = loadGalleryItems();
+    items = [...galleryItems];
+
+    if (!items.length) {
+      const empty = document.createElement("p");
+      empty.textContent = "No portfolio images yet.";
+      track.appendChild(empty);
       return;
     }
 
-    card.classList.add("gallery-item-reveal");
-    card.style.setProperty("--gallery-reveal-delay", `${Math.min(revealIndex, 11) * 70}ms`);
-    cardObserver.observe(card);
-  };
-
-  const appendGridItems = (items, startIndex) => {
-    items.forEach((item, localIndex) => {
-      const itemIndex = startIndex + localIndex;
-      const card = document.createElement("button");
-      card.className = "gallery-item";
-      card.type = "button";
-      card.style.setProperty("--span", String(item.span == null ? 36 : item.span));
-      card.setAttribute("aria-label", `Open image: ${item.alt}`);
+    items.forEach((item, index) => {
+      const slide = document.createElement("button");
+      slide.type = "button";
+      slide.className = "portfolio-slide";
+      slide.setAttribute("aria-label", `Open image: ${item.alt}`);
 
       const image = document.createElement("img");
       image.src = item.src;
       image.alt = item.alt;
-      image.loading = "lazy";
+      image.loading = index < 2 ? "eager" : "lazy";
       image.decoding = "async";
-
       image.addEventListener(
         "error",
         () => {
-          card.classList.add("image-missing");
+          slide.classList.add("image-missing");
         },
         { once: true }
       );
 
-      card.append(image);
-
-      card.addEventListener("click", () => openLightbox(itemIndex));
-      card.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          openLightbox(itemIndex);
-        }
-      });
-
-      grid.appendChild(card);
-      revealCard(card, localIndex);
+      slide.append(image);
+      slide.addEventListener("click", () => openLightbox(index));
+      track.appendChild(slide);
     });
+
+    markMissingImagesOnError(track);
   };
 
-  const renderGrid = () => {
-    ensureValidActiveFilter();
-    filteredItems =
-      activeFilter === "All"
-        ? [...galleryItems]
-        : galleryItems.filter((item) => item.mood === activeFilter);
+  const mountEmbla = () => {
+    if (embla) {
+      embla.destroy();
+      embla = null;
+    }
 
-    grid.innerHTML = "";
+    autoplayHalted = false;
 
-    if (!filteredItems.length) {
-      const empty = document.createElement("p");
-      empty.textContent = "No images in this mood yet. Add more gallery items in script.js.";
-      grid.appendChild(empty);
-      loadMoreBtn.hidden = true;
+    if (!items.length) {
       return;
     }
 
-    appendGridItems(filteredItems.slice(0, visibleCount), 0);
+    if (typeof window.EmblaCarousel !== "function") {
+      console.error("EmblaCarousel is not available. Check vendor/embla scripts.");
+      return;
+    }
 
-    loadMoreBtn.hidden = visibleCount >= filteredItems.length;
-    markMissingImagesOnError(grid);
+    const plugins = [];
+    const canAutoplay =
+      !reducedMotion &&
+      items.length > 1 &&
+      typeof window.EmblaCarouselAutoplay === "function";
+
+    if (canAutoplay) {
+      // stopOnInteraction: drag stops permanently.
+      // Hover pause is handled below so mouseleave can resume until a real interaction.
+      plugins.push(
+        window.EmblaCarouselAutoplay({
+          delay: 4500,
+          stopOnInteraction: true,
+          stopOnMouseEnter: false,
+          stopOnFocusIn: true,
+          playOnInit: true
+        })
+      );
+    }
+
+    embla = window.EmblaCarousel(
+      viewport,
+      {
+        loop: items.length > 1,
+        align: "start",
+        containScroll: "trimSnaps",
+        dragFree: false,
+        skipSnaps: false,
+        duration: reducedMotion ? 0 : 28
+      },
+      plugins
+    );
+
+    viewport.removeEventListener("mouseenter", onViewportEnter);
+    viewport.removeEventListener("mouseleave", onViewportLeave);
+
+    if (canAutoplay) {
+      embla.on("pointerDown", haltAutoplay);
+      viewport.addEventListener("mouseenter", onViewportEnter);
+      viewport.addEventListener("mouseleave", onViewportLeave);
+    }
   };
 
   const refresh = () => {
-    resetVisibleCount();
-    renderFilterButtons();
-    renderGrid();
+    buildSlides();
+    mountEmbla();
   };
 
-  loadMoreBtn.addEventListener("click", () => {
-    const previousVisibleCount = visibleCount;
-    visibleCount += getBatchSize();
-    appendGridItems(
-      filteredItems.slice(previousVisibleCount, visibleCount),
-      previousVisibleCount
-    );
-    loadMoreBtn.hidden = visibleCount >= filteredItems.length;
-    markMissingImagesOnError(grid);
-  });
-
+  prevControl.addEventListener("click", previous);
+  nextControl.addEventListener("click", next);
   closeBtn.addEventListener("click", closeLightbox);
   prevBtn.addEventListener("click", previousLightbox);
   nextBtn.addEventListener("click", nextLightbox);
@@ -1331,6 +1327,8 @@ function initMoodGallery() {
     closeLightbox,
     previousLightbox,
     nextLightbox,
+    previous,
+    next,
     refresh
   };
 }
@@ -1431,7 +1429,9 @@ function markMissingImagesOnError(root) {
   const images = root.querySelectorAll("img");
   images.forEach((image) => {
     const markMissing = () => {
-      const parent = image.closest(".frame-image, .hero-card, .gallery-item, .featured-stage");
+      const parent = image.closest(
+        ".frame-image, .hero-card, .gallery-item, .portfolio-slide, .featured-stage"
+      );
       if (parent) {
         parent.classList.add("image-missing");
       }
