@@ -49,7 +49,7 @@ python3 -m http.server 8080
 - `#home` — hero (full viewport image + `#1A1A1A` 0.6 overlay + headline / sub / 3 perks)
 - `#services` — services (bg `#2A4C3A`, centered cream “SERVICES”, 3 dark cards: image + title + desc + includes list + text price)
 - `#portfolio` — cinematic Embla strip (content-height, not full-viewport) + lightbox/autoplay; shared `.section-pad` / `.section-inner` title shell; fed by `gallery-data.js`
-- `#contact` — booking form → Google Forms (same green / cream text treatment)
+- `#contact` — “Book Your Photography Session” + form → Google Forms (green section, content-height pad 64/80/96)
 - Footer, lightbox (`#lightbox`), admin shell (`#admin-shell`)
 
 Scripts: Embla CDN → `gallery-data.js` → `script.js` → `image-library.js` (cache-bust query `?v=`).
@@ -97,7 +97,7 @@ Hero photo (temporary remote; optimize to local WebP later):
 
 ### Pending (later iterations)
 
-- [ ] Contact form visual polish (detail TBD)
+- [ ] Contact form field/button visual polish (optional further pass)
 - [ ] Self-host Staatliches + Schibsted Grotesk under `assets/fonts/`
 - [ ] Optimize hero image → local WebP (stop Webflow CDN dependency)
 - [ ] Further Webflow parity pass (spacing, motion, exact type scales)
