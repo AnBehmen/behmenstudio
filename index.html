@@ -43,7 +43,7 @@
       as="image"
       href="https://cdn.prod.website-files.com/6a1c24137686060838b25c6c/6a1c24147686060838b25c87_mittwochu%25CC%2588lu0129-p-2600.jpg"
     />
-    <link rel="stylesheet" href="styles.css?v=20261126-services6" />
+    <link rel="stylesheet" href="styles.css?v=20261126-portfolio6" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -130,11 +130,11 @@
       </section>
 
       <section
-        class="services section-screen"
+        class="services section-screen section-pad"
         id="services"
         aria-labelledby="services-title"
       >
-        <div class="services-inner">
+        <div class="section-inner">
           <h2 id="services-title" class="section-display-title">SERVICES</h2>
 
           <div class="session-grid">
@@ -216,20 +216,23 @@
       </section>
 
       <section
-        class="portfolio section-screen"
+        class="portfolio section-pad"
         id="portfolio"
         aria-labelledby="portfolio-title"
       >
-        <div class="container portfolio-inner">
+        <div class="section-inner">
           <h2 id="portfolio-title" class="section-display-title">PORTFOLIO</h2>
+        </div>
 
-          <div class="portfolio-carousel">
-            <div class="portfolio-viewport" id="portfolio-viewport">
-              <div class="portfolio-track" id="portfolio-track" aria-live="polite">
-                <!-- Slides injected from gallery-data.js -->
-              </div>
+        <div class="portfolio-carousel">
+          <div class="portfolio-viewport" id="portfolio-viewport">
+            <div class="portfolio-track" id="portfolio-track" aria-live="polite">
+              <!-- Slides injected from gallery-data.js -->
             </div>
+          </div>
 
+          <div class="section-inner portfolio-toolbar">
+            <p class="portfolio-hint">Click an image to view full size</p>
             <div class="portfolio-controls">
               <button
                 class="portfolio-nav portfolio-prev"
@@ -237,7 +240,12 @@
                 type="button"
                 aria-label="Previous image"
               >
-                ←
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path
+                    d="M15.4 7.4L14 6l-6 6 6 6 1.4-1.4L10.8 12z"
+                    fill="currentColor"
+                  />
+                </svg>
               </button>
               <button
                 class="portfolio-nav portfolio-next"
@@ -245,7 +253,12 @@
                 type="button"
                 aria-label="Next image"
               >
-                →
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path
+                    d="M9.6 6L8.2 7.4 12.8 12l-4.6 4.6L9.6 18l6-6z"
+                    fill="currentColor"
+                  />
+                </svg>
               </button>
             </div>
           </div>
@@ -555,12 +568,10 @@
       </aside>
     </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/embla-carousel@8.5.2/embla-carousel.umd.js"
-      defer
-    ></script>
+    <script src="vendor/embla/embla-carousel.umd.js" defer></script>
+    <script src="vendor/embla/embla-carousel-autoplay.umd.js" defer></script>
     <script src="gallery-data.js?v=20261126-hero2" defer></script>
-    <script src="script.js?v=20261126-hero2" defer></script>
+    <script src="script.js?v=20261126-portfolio3" defer></script>
     <script src="image-library.js?v=20261126-hero2" defer></script>
   </body>
 </html>

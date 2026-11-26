@@ -1115,7 +1115,27 @@ function initPortfolioCarousel() {
   let items = [...galleryItems];
   let lightboxIndex = 0;
   let embla = null;
+  let autoplayHalted = false;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const getAutoplay = () => embla?.plugins?.()?.autoplay ?? null;
+
+  const haltAutoplay = () => {
+    autoplayHalted = true;
+    getAutoplay()?.stop();
+  };
+
+  const onViewportEnter = () => {
+    if (!autoplayHalted) {
+      getAutoplay()?.stop();
+    }
+  };
+
+  const onViewportLeave = () => {
+    if (!autoplayHalted) {
+      getAutoplay()?.play();
+    }
+  };
 
   const renderLightbox = () => {
     const item = items[lightboxIndex];
@@ -1139,6 +1159,7 @@ function initPortfolioCarousel() {
   };
 
   const openLightbox = (index) => {
+    haltAutoplay();
     lightboxIndex = index;
     renderLightbox();
     lightbox.classList.add("is-open");
@@ -1170,12 +1191,14 @@ function initPortfolioCarousel() {
   };
 
   const previous = () => {
+    haltAutoplay();
     if (embla) {
       embla.scrollPrev();
     }
   };
 
   const next = () => {
+    haltAutoplay();
     if (embla) {
       embla.scrollNext();
     }
@@ -1226,22 +1249,58 @@ function initPortfolioCarousel() {
       embla = null;
     }
 
+    autoplayHalted = false;
+
     if (!items.length) {
       return;
     }
 
     if (typeof window.EmblaCarousel !== "function") {
-      console.error("EmblaCarousel is not available. Check the CDN script.");
+      console.error("EmblaCarousel is not available. Check vendor/embla scripts.");
       return;
     }
 
-    embla = window.EmblaCarousel(viewport, {
-      loop: items.length > 1,
-      align: "start",
-      containScroll: "trimSnaps",
-      dragFree: false,
-      duration: reducedMotion ? 0 : 25
-    });
+    const plugins = [];
+    const canAutoplay =
+      !reducedMotion &&
+      items.length > 1 &&
+      typeof window.EmblaCarouselAutoplay === "function";
+
+    if (canAutoplay) {
+      // stopOnInteraction: drag stops permanently.
+      // Hover pause is handled below so mouseleave can resume until a real interaction.
+      plugins.push(
+        window.EmblaCarouselAutoplay({
+          delay: 4500,
+          stopOnInteraction: true,
+          stopOnMouseEnter: false,
+          stopOnFocusIn: true,
+          playOnInit: true
+        })
+      );
+    }
+
+    embla = window.EmblaCarousel(
+      viewport,
+      {
+        loop: items.length > 1,
+        align: "start",
+        containScroll: "trimSnaps",
+        dragFree: false,
+        skipSnaps: false,
+        duration: reducedMotion ? 0 : 28
+      },
+      plugins
+    );
+
+    viewport.removeEventListener("mouseenter", onViewportEnter);
+    viewport.removeEventListener("mouseleave", onViewportLeave);
+
+    if (canAutoplay) {
+      embla.on("pointerDown", haltAutoplay);
+      viewport.addEventListener("mouseenter", onViewportEnter);
+      viewport.addEventListener("mouseleave", onViewportLeave);
+    }
   };
 
   const refresh = () => {

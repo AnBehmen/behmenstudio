@@ -430,25 +430,30 @@ ul {
   display: none;
 }
 
-/* ——— Services ——— */
+/* ——— Shared section shell (Services, Portfolio, …) ——— */
 
-.services {
-  background: var(--secondary);
-  color: var(--cream);
-  /* Webflow section pad: mobile 80 / tablet 112 / desktop 128 */
+/* Webflow section pad: mobile 80 / tablet 112 / desktop 128 */
+.section-pad {
   padding: 80px 0;
 }
 
-.services-inner {
+.section-inner {
   width: 100%;
   max-width: 1280px;
   margin-inline: auto;
   padding-inline: 16px;
 }
 
-.services .section-display-title {
+.section-inner > .section-display-title {
   text-align: center;
   margin-bottom: 2.5rem;
+}
+
+/* ——— Services ——— */
+
+.services {
+  background: var(--secondary);
+  color: var(--cream);
 }
 
 .session-grid {
@@ -574,25 +579,18 @@ ul {
 .portfolio {
   background: var(--ink);
   color: var(--cream);
-  padding: calc(var(--header-h) + 1.5rem) 0 3rem;
-}
-
-.portfolio-inner {
-  width: 100%;
-}
-
-.portfolio .section-display-title {
-  margin-bottom: 1.5rem;
+  overflow: hidden;
 }
 
 .portfolio-carousel {
   display: grid;
-  gap: 1.2rem;
+  gap: 1.35rem;
 }
 
+/* Full-bleed strip; first slide lines up with .section-inner */
 .portfolio-viewport {
   overflow: hidden;
-  border-radius: var(--radius-lg);
+  padding-left: max(16px, calc((100vw - 1280px) / 2 + 16px));
 }
 
 .portfolio-track {
@@ -602,42 +600,101 @@ ul {
 
 .portfolio-slide {
   position: relative;
-  flex: 0 0 85%;
+  /* Mobile: dominant slide + clear peek; section stays content-height */
+  flex: 0 0 88%;
   min-width: 0;
-  margin-right: 1rem;
+  margin-right: 12px;
   border: 0;
   padding: 0;
-  background: transparent;
+  background: #111;
   cursor: pointer;
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
   overflow: hidden;
+  color: var(--cream);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .portfolio-slide img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
+  display: block;
+  transition: transform 480ms ease;
+}
+
+.portfolio-slide::after {
+  content: "View";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--headline);
+  font-weight: var(--display-weight);
+  line-height: var(--display-leading);
+  letter-spacing: var(--display-tracking);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--cream);
+  background: rgba(26, 26, 26, 0.45);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.portfolio-slide:hover img,
+.portfolio-slide:focus-visible img {
+  transform: scale(1.04);
+}
+
+.portfolio-slide:hover::after,
+.portfolio-slide:focus-visible::after {
+  opacity: 1;
+}
+
+.portfolio-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.portfolio-hint {
+  margin: 0;
+  color: var(--muted-cream);
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .portfolio-controls {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.65rem;
+  flex-shrink: 0;
 }
 
 .portfolio-nav {
-  border: 1px solid rgba(255, 255, 230, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 230, 0.28);
   background: transparent;
   color: var(--cream);
-  border-radius: 999px;
-  width: 2.8rem;
-  height: 2.8rem;
+  border-radius: 8px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
   cursor: pointer;
-  font-size: 1.1rem;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .portfolio-nav:hover,
 .portfolio-nav:focus-visible {
-  background: rgba(255, 255, 230, 0.1);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  color: var(--accent);
+}
+
+.portfolio-nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* ——— Contact ——— */
@@ -1190,6 +1247,14 @@ a:focus-visible {
     object-position: center center;
   }
 
+  .portfolio-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .portfolio-hint {
+    flex: 1 1 12rem;
+  }
+
   /* Extra break after "Let's" → LET'S / CAPTURE / YOUR STORY */
   .hero-title-break-sm,
   .hero-sub-break {
@@ -1227,11 +1292,11 @@ a:focus-visible {
 }
 
 @media (min-width: 760px) {
-  .services {
+  .section-pad {
     padding: 112px 0;
   }
 
-  .services .section-display-title {
+  .section-inner > .section-display-title {
     margin-bottom: 3rem;
   }
 
@@ -1249,17 +1314,34 @@ a:focus-visible {
   }
 
   .portfolio-slide {
-    flex-basis: 55%;
+    flex-basis: 72%;
+    margin-right: 16px;
   }
 }
 
 @media (min-width: 992px) {
-  .services {
+  .section-pad {
     padding: 128px 0;
   }
 
+  /* Desktop: never taller than the viewport; shrink slides to fit chrome */
+  .portfolio {
+    max-height: 100vh;
+    max-height: 100dvh;
+    box-sizing: border-box;
+  }
+
   .portfolio-slide {
-    flex-basis: 42%;
+    /* Prefer ~56vw, but shrink width if max image height would overflow the section */
+    flex-basis: min(56%, calc((100dvh - 256px - 11rem) * 3 / 4));
+    margin-right: 20px;
+  }
+
+  .portfolio-slide img {
+    max-height: calc(100dvh - 256px - 11rem);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 }
 
@@ -1274,5 +1356,10 @@ a:focus-visible {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .portfolio-slide:hover img,
+  .portfolio-slide:focus-visible img {
+    transform: none;
   }
 }
