@@ -1,0 +1,22 @@
+---
+description: Always read SITE_CONTEXT.md before changing this static site
+alwaysApply: true
+---
+
+# Behmen Studio agent rule
+
+Before exploring or editing this codebase, read and follow **`SITE_CONTEXT.md`** at the repo root.
+
+## Hard constraints
+
+- This is a **static HTML/CSS/vanilla JS** site. No Vue, Nuxt, React, or npm build unless the user explicitly requests a rewrite.
+- Prefer small, targeted edits in the files listed in `SITE_CONTEXT.md`.
+- Drive work from the **Change requests** checklist in `SITE_CONTEXT.md`; update checkboxes when finishing items.
+- Deploy is **push to `main`** (GitHub Pages). Do not invent a deploy pipeline.
+- Do **not** treat the in-browser admin / GitHub-token flow as secure production auth.
+- Do not add bundling/minifying or new markdown docs unless asked.
+- Only commit when the user asks.
+
+## When context is stale
+
+If `SITE_CONTEXT.md` conflicts with the code, trust the code, then update `SITE_CONTEXT.md` so the next agent stays accurate.
