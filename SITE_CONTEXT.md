@@ -10,7 +10,8 @@ Update the **Change requests** section when new client asks come in; mark items 
 - **Host**: GitHub Pages from `main` branch root → `behmenstudio.com` (`CNAME`)
 - **Deploy**: push to `main` = publish (usually 1–2 minutes). No separate deploy job for page/CSS/JS edits
 - **Portfolio carousel**: Embla Carousel + Autoplay, vendored UMD under `vendor/embla/` (no CDN, no npm build)
-- **Vendor later**: Staatliches/Schibsted Grotesk under `assets/fonts/`; hero image → local WebP
+- **Fonts**: Staatliches + Schibsted Grotesk self-hosted under `assets/fonts/` (no Google CDN)
+- **Hero image**: local `assets/images/web/hero-main.webp` (source JPEG in `assets/images/hero/`, not gallery `originals/`)
 
 ## Local preview
 
@@ -63,12 +64,10 @@ Scripts: Embla CDN → `gallery-data.js` → `script.js` → `image-library.js` 
 | Accent (checks) | `#E9FF47` |
 | Card on secondary | `#1A1A1A`, radius 12px, pad 24px |
 | Hero overlay | `#1A1A1A` @ 0.6 |
-| Display font | Staatliches — weight 400, lh 1.04, tracking -0.01em (`--display-*` + `.display-type` in `styles.css`); CDN woff2 for now; self-host later |
-| Body font | Schibsted Grotesk — CDN woff2 for now; self-host later |
+| Display font | Staatliches — weight 400, lh 1.04, tracking -0.01em (`--display-*` + `.display-type`); local `assets/fonts/staatliches-400.woff2` |
+| Body font | Schibsted Grotesk — local `assets/fonts/schibsted-grotesk-400.woff2` |
 
-Hero photo (temporary remote; optimize to local WebP later):
-
-`https://cdn.prod.website-files.com/6a1c24137686060838b25c6c/6a1c24147686060838b25c87_mittwochu%CC%88lu0129.jpg`
+Hero photo: `assets/images/web/hero-main.webp` (2600×1735, ~239KB)
 
 ## Contact / booking
 
@@ -99,8 +98,6 @@ Hero photo (temporary remote; optimize to local WebP later):
 
 - [ ] Contact form field/button visual polish (optional further pass)
 - [ ] Optional: restyle internal `imageshelp.html` (noindex helper; not public)
-- [ ] Self-host Staatliches + Schibsted Grotesk under `assets/fonts/`
-- [ ] Optimize hero image → local WebP (stop Webflow CDN dependency)
 - [ ] Further Webflow parity pass (spacing, motion, exact type scales)
 
 ### Done (iteration 1–2)
@@ -116,6 +113,8 @@ Hero photo (temporary remote; optimize to local WebP later):
 - [x] Contact green section, centered form without colored card chrome
 - [x] Privacy + Terms restyled to match redesign (header/footer/type)
 - [x] Load Staatliches + Schibsted Grotesk via remote woff2 for now
+- [x] Self-host Staatliches + Schibsted Grotesk under `assets/fonts/`
+- [x] Optimize hero image → local WebP (stop Webflow CDN dependency)
 
 ## Design reference (Webflow)
 

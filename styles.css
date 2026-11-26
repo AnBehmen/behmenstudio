@@ -5,8 +5,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("https://fonts.gstatic.com/s/staatliches/v15/HI_OiY8KO6hCsQSoAPmtMYebvpCfOMPT.woff2")
-    format("woff2");
+  src: url("assets/fonts/staatliches-400.woff2") format("woff2");
 }
 
 @font-face {
@@ -14,8 +13,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("https://fonts.gstatic.com/s/schibstedgrotesk/v7/JqzK5SSPQuCQF3t8uOwiUL-taUTtarVKQ9vZ6pJJWlMNIsEwSMhvflSFOD3s.woff2")
-    format("woff2");
+  src: url("assets/fonts/schibsted-grotesk-400.woff2") format("woff2");
 }
 
 :root {
