@@ -22,17 +22,26 @@
   --cream: #ffffe6;
   --secondary: #2a4c3a;
   --ink: #1a1a1a;
+  --accent: #e9ff47;
   --hero-overlay: rgba(26, 26, 26, 0.6);
   --white: #ffffff;
   --muted-on-green: rgba(255, 255, 230, 0.78);
+  --muted-cream: color-mix(in srgb, var(--cream) 60%, transparent);
   --line-on-green: rgba(255, 255, 230, 0.22);
+  --line-cream-15: color-mix(in srgb, var(--cream) 15%, transparent);
   --card: rgba(255, 255, 230, 0.08);
+  --card-on-secondary: #1a1a1a;
   --shadow: 0 24px 44px rgba(0, 0, 0, 0.28);
   --radius: 1rem;
+  --radius-md: 12px;
   --radius-lg: 1.4rem;
   --container: min(1120px, 92vw);
   --headline: "Staatliches", sans-serif;
   --body: "Schibsted Grotesk", sans-serif;
+  /* Webflow display type (Staatliches) — shared by h1–h3 / section titles */
+  --display-weight: 400;
+  --display-leading: 1.04;
+  --display-tracking: -0.01em;
   --header-h: 4.5rem;
 }
 
@@ -90,16 +99,23 @@ a {
   scroll-margin-top: 0;
 }
 
+/*
+  Shared Staatliches display type (Webflow-aligned).
+  Use `.display-type` on non-heading elements that should match.
+*/
+.display-type,
 h1,
 h2,
 h3,
 .section-display-title,
 .brand-text,
-.site-nav a {
+.service-price,
+.hero-perk-label {
   font-family: var(--headline);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  line-height: 1.05;
+  font-weight: var(--display-weight);
+  line-height: var(--display-leading);
+  letter-spacing: var(--display-tracking);
+  text-transform: none;
 }
 
 h1,
@@ -200,8 +216,6 @@ ul {
 
 .brand-text {
   font-size: clamp(1.5rem, 2.2vw, 2rem);
-  letter-spacing: -0.01em;
-  line-height: 1.04;
 }
 
 .site-nav {
@@ -339,14 +353,10 @@ ul {
   width: 100%;
 }
 
-/* Webflow `.heading_hero` */
+/* Webflow `.heading_hero` — size/spacing only; type metrics via `.display-type` vars */
 .hero h1,
 #hero-title {
-  font-weight: 400;
   font-size: clamp(3.25rem, 11vw, 7.99rem);
-  line-height: 1.04;
-  letter-spacing: -0.01em;
-  text-transform: none;
   color: var(--cream);
   margin: 3.75rem 0 0.3em;
   padding: 0 3.75rem;
@@ -395,15 +405,10 @@ ul {
   min-width: 0;
 }
 
-/* Webflow perk titles (~32px / -0.01em) */
+/* Webflow perk titles (~32px) — type metrics via shared display vars */
 .hero-perk-label {
   margin: 0;
-  font-family: var(--headline);
   font-size: clamp(1.35rem, 2.2vw, 2rem);
-  font-weight: 400;
-  line-height: 1.04;
-  letter-spacing: -0.01em;
-  text-transform: none;
   color: var(--cream);
 }
 
@@ -430,60 +435,125 @@ ul {
 .services {
   background: var(--secondary);
   color: var(--cream);
-  padding: calc(var(--header-h) + 1.5rem) 0 3rem;
+  /* Webflow section pad: mobile 80 / tablet 112 / desktop 128 */
+  padding: 80px 0;
 }
 
 .services-inner {
   width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 16px;
 }
 
 .services .section-display-title {
-  margin-bottom: 1.8rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
 .session-grid {
   display: grid;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .session-card {
-  background: var(--card);
-  border: 1px solid var(--line-on-green);
-  border-radius: var(--radius);
-  padding: 1rem;
+  background: var(--card-on-secondary);
+  border-radius: var(--radius-md);
+  padding: 0 0 24px;
   display: flex;
   flex-direction: column;
+  color: var(--cream);
+  overflow: hidden;
 }
 
 .session-media {
-  margin-bottom: 0.9rem;
-  border-radius: calc(var(--radius) - 0.2rem);
+  margin: 0 0 16px;
+  border-radius: 0;
   overflow: hidden;
 }
 
 .session-media img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
+  object-position: center center;
 }
 
-.session-card p {
-  margin-top: 0.55rem;
-  color: var(--muted-on-green);
+.session-card-copy,
+.service-divider,
+.service-includes,
+.service-price {
+  margin-left: 24px;
+  margin-right: 24px;
 }
 
-.service-meta {
-  margin-top: auto;
-  padding-top: 1rem;
+.session-card-copy {
+  margin-bottom: 16px;
+}
+
+.session-card h3 {
+  margin: 0 0 0.5em;
+  font-size: clamp(1.03rem, 1.6vw, 1.41rem);
+  color: var(--cream);
+}
+
+.service-desc {
+  margin: 0;
+  color: var(--muted-cream);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.service-divider {
+  height: 0;
+  border: 0;
+  border-bottom: 1px solid var(--line-cream-15);
+  margin-top: 0;
+  margin-bottom: 16px;
+  align-self: stretch;
+}
+
+.service-includes {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-includes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--cream);
+}
+
+.service-includes li:last-child {
+  margin-bottom: 0;
+}
+
+.service-includes li::before {
+  content: "";
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin-top: 0.3em;
+  border-radius: 8px;
+  background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23e9ff47' d='M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }
 
 .service-price {
-  margin-top: 0;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 1.5rem;
   color: var(--cream);
-  font-family: var(--headline);
-  font-size: 1.15rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
 }
 
 .frame-image.image-missing,
@@ -620,7 +690,7 @@ ul {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--cream);
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .form-control {
@@ -1060,12 +1130,10 @@ a:focus-visible {
     white-space: nowrap;
   }
 
-  /* Webflow tablet `.heading_hero`: ~102px / 1.04 / -0.01em */
+  /* Webflow tablet `.heading_hero`: ~102px */
   .hero h1,
   #hero-title {
     font-size: 6.39rem;
-    line-height: 1.04;
-    letter-spacing: -0.01em;
     padding-left: 60px;
     padding-right: 60px;
     margin-top: 60px;
@@ -1098,8 +1166,6 @@ a:focus-visible {
 @media (min-width: 760px) and (max-width: 991px) {
   .hero-perk-label {
     font-size: 1.6rem;
-    line-height: 1.04;
-    letter-spacing: -0.01em;
   }
 }
 
@@ -1110,18 +1176,31 @@ a:focus-visible {
 }
 
 @media (max-width: 759px) {
+  /* Shorter service media on mobile; keep desktop/tablet at 2/3 */
+  .session-media img {
+    aspect-ratio: 5 / 3;
+    object-position: center 28%;
+  }
+
+  .session-card:nth-child(2) .session-media img {
+    object-position: center 32%;
+  }
+
+  .session-card:nth-child(3) .session-media img {
+    object-position: center center;
+  }
+
   /* Extra break after "Let's" → LET'S / CAPTURE / YOUR STORY */
   .hero-title-break-sm,
   .hero-sub-break {
     display: block;
   }
 
-  /* Webflow mobile `.heading_hero`: 82px / lh ~1.2 / tracking -0.01em */
+  /* Webflow mobile `.heading_hero`: 82px / lh ~1.2 */
   .hero h1,
   #hero-title {
     font-size: 5.12rem;
     line-height: 1.2;
-    letter-spacing: -0.01em;
     padding-left: 60px;
     padding-right: 60px;
     margin-top: 60px;
@@ -1148,8 +1227,16 @@ a:focus-visible {
 }
 
 @media (min-width: 760px) {
+  .services {
+    padding: 112px 0;
+  }
+
+  .services .section-display-title {
+    margin-bottom: 3rem;
+  }
+
   .session-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .form-grid {
@@ -1166,9 +1253,9 @@ a:focus-visible {
   }
 }
 
-@media (min-width: 980px) {
-  .session-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+@media (min-width: 992px) {
+  .services {
+    padding: 128px 0;
   }
 
   .portfolio-slide {

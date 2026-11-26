@@ -47,7 +47,7 @@ python3 -m http.server 8080
 ## Page structure (`index.html` — one-pager, full-viewport sections)
 
 - `#home` — hero (full viewport image + `#1A1A1A` 0.6 overlay + headline / sub / 3 perks)
-- `#services` — services (bg `#2A4C3A`, headline `#FFFFE6`, 3 cards — card chrome polish later)
+- `#services` — services (bg `#2A4C3A`, centered cream “SERVICES”, 3 dark cards: image + title + desc + includes list + text price)
 - `#portfolio` — Embla image carousel fed by `gallery-data.js`
 - `#contact` — booking form → Google Forms (same green / cream text treatment)
 - Footer, lightbox (`#lightbox`), admin shell (`#admin-shell`)
@@ -60,8 +60,10 @@ Scripts: Embla CDN → `gallery-data.js` → `script.js` → `image-library.js` 
 |-------|--------|
 | Secondary / services+contact bg | `#2A4C3A` |
 | Headline cream | `#FFFFE6` |
+| Accent (checks) | `#E9FF47` |
+| Card on secondary | `#1A1A1A`, radius 12px, pad 24px |
 | Hero overlay | `#1A1A1A` @ 0.6 |
-| Display font | Staatliches (uppercase) — CDN woff2 for now; self-host later |
+| Display font | Staatliches — weight 400, lh 1.04, tracking -0.01em (`--display-*` + `.display-type` in `styles.css`); CDN woff2 for now; self-host later |
 | Body font | Schibsted Grotesk — CDN woff2 for now; self-host later |
 
 Hero photo (temporary remote; optimize to local WebP later):
@@ -95,7 +97,7 @@ Hero photo (temporary remote; optimize to local WebP later):
 
 ### Pending (later iterations)
 
-- [ ] Services card design (Webflow detail) — keep current card content/layout for now
+- [ ] Portfolio visual/layout parity with Webflow (keep Embla + `gallery-data.js`)
 - [ ] Contact form visual polish (detail TBD)
 - [ ] Vendor Embla JS locally (remove jsDelivr CDN)
 - [ ] Self-host Staatliches + Schibsted Grotesk under `assets/fonts/`
@@ -109,6 +111,7 @@ Hero photo (temporary remote; optimize to local WebP later):
 - [x] Hero remote image + dark overlay
 - [x] Hero rebuilt from Webflow scrape (layout + overlay + type + perks bottom-right)
 - [x] Services green bg + cream headline; keep existing 3 service boxes
+- [x] Services card design (Webflow: dark cards, includes list, text prices; images 17/15/36)
 - [x] Portfolio Embla carousel (CDN for now; vendor later)
 - [x] Contact green section, centered form without colored card chrome
 - [x] Load Staatliches + Schibsted Grotesk via remote woff2 for now
